@@ -1,0 +1,42 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">300dp</dimen>
+    <dimen name="title">30sp</dimen>
+
+
+    <dimen name="text_size">12sp</dimen>
+    <dimen name="text_size_v1">14sp</dimen>
+    <dimen name="text_size_v2">16sp</dimen>
+    <dimen name="text_size_v2_5">18sp</dimen>
+    <dimen name="text_size_v3">24sp</dimen>
+    <dimen name="text_size_v4">32sp</dimen>
+    <dimen name="text_size_v5">48sp</dimen>
+
+    <dimen name="margin">8dp</dimen>
+    <dimen name="margin_x2">16dp</dimen>
+    <dimen name="margin_x3">24dp</dimen>
+    <dimen name="margin_x4">32dp</dimen>
+    <dimen name="margin_x6">48dp</dimen>
+    <dimen name="margin_x7">56dp</dimen>
+
+    <dimen name="icon_size">8dp</dimen>
+    <dimen name="icon_size_x2">16dp</dimen>
+    <dimen name="icon_size_x3">24dp</dimen>
+    <dimen name="icon_size_x4">32dp</dimen>
+    <dimen name="icon_size_x5">40dp</dimen>
+    <dimen name="icon_size_x6">48dp</dimen>
+    <dimen name="icon_size_x7">56dp</dimen>
+    <dimen name="icon_size_x8">64dp</dimen>
+    <dimen name="icon_size_x9">72dp</dimen>
+    <dimen name="icon_size_x11">88dp</dimen>
+    <dimen name="icon_size_x12">96dp</dimen>
+    <dimen name="icon_size_x16">128dp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+
+    <dimen name="touch_raise">6dp</dimen>
+</resources>

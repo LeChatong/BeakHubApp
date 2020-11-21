@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#600769</color>
+    <color name="colorPrimaryDark">#00695C</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="bgBeakHub">#600769</color>
+    <color name="bhBack">#AB6C2974</color>
+    <color name="White">#FCFCFC</color>
+    <color name="bhRed">#D11F4B</color>
+    <color name="bhBlack">#000000</color>
+    <color name="bhDarkGrey">#646363</color>
+</resources>

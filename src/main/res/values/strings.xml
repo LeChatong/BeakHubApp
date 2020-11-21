@@ -1,0 +1,134 @@
+<resources>
+    <string name="app_name">BeakHub</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="home_blank_fragment">Home blank fragment</string>
+    <string name="search_blank_fragment">Search blank fragment</string>
+    <string name="profile_blank_fragment">Profile blank fragment</string>
+    <string name="swipe_left_for_register">Register</string>
+    <string name="forgot_password">Forgot</string>
+    <string name="login">Login</string>
+    <string name="sign_in">Sign In</string>
+    <string name="password">Password</string>
+    <string name="username">Username</string>
+    <string name="last_connection">Last Connection</string>
+    <string name="password_require">Password Required</string>
+    <string name="username_require">Username Required</string>
+    <string name="e_mail">Email</string>
+    <string name="bhAccount">Account</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="birth_date">Birth Date</string>
+    <string name="sexe">Sexe</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="upload_text">UpLoad a Profile picture</string>
+    <string name="upload">UpLoad</string>
+    <string name="tag">Let\'s join us and \nBuild your relationship with others</string>
+    <string name="swipe_right_for_login">Login</string>
+    <string name="register">Register</string>
+    <string name="saveuser">Save User</string>
+    <string name="save_user_info">Add your user information to have access to the application</string>
+    <string name="edit_user">Edit User</string>
+    <string name="save">Save</string>
+    <string name="re_type_password">Re-type Password</string>
+    <string name="your_name">Full Name</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    <string name="password_forgotten">Password Forgotten</string>
+    <string name="recovery_email">Enter a recovery email</string>
+    <string name="send">Send</string>
+    <string name="search">Search</string>
+    <string name="about">About</string>
+    <string name="exit">Exit</string>
+    <string name="content_description_search">Search bhJob or address</string>
+    <string name="category">Category</string>
+    <string name="bhJob">Job</string>
+    <string name="my_job">My Job</string>
+    <string name="description">Description of a Job ...</string>
+    <string name="sexe_prompt">Choose a sexe</string>
+
+    <string name="title">Title</string>
+    <string name="title_search">Search</string>
+    <string name="title_profile">Profile</string>
+    <string name="action_settings">Informations</string>
+    <string name="page_home">Home</string>
+    <string name="page_notifications">Notifications</string>
+    <string name="lechatong">LeChatong</string>
+    <string name="add_job">New Job</string>
+    <string name="add_address">New Address</string>
+    <string name="title_address">Endtitle*</string>
+    <string-array name="sexe_arrays">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string name="category_prompt">Choose a category</string>
+    <string-array name="category_arrays">
+        <item>Learning</item>
+        <item>Mecanic</item>
+        <item>Database Engeneering</item>
+    </string-array>
+    <string name="title_activity_profile_job">ProfileJobActivity</string>
+
+    <string name="example_likes">13 likes</string>
+    <string name="example_opinion">20 comments</string>
+
+
+    <string name="version">Version 1.0.0</string>
+    <string name="copyright">BeakHub by LeChatong © 2020</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="error_field">Erreur Rencontrée</string>
+
+    <string name="not_network">Network Unavaible !</string>
+    <string name="dismiss">DISMISS</string>
+    <string name="error_field_required">Vous devez saisir tout les champs de texte obligatoire</string>
+
+    <string name="no_account">Account not found</string>
+    <string name="error">Erreur</string>
+    <string name="error_password">Vous devez confirmer le mot de passe</string>
+    <string name="server_error">Server Wrong</string>
+    <string name="problem">Problem not Resolve</string>
+
+    <string name="please_wait">Please Wait...</string>
+    <string name="login_process">Login Process</string>
+    <string name="save_process">Save Process</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_profile">Profil</string>
+    <string name="menu_account">Account</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+    <string name="profile_user">User Profile</string>
+    <string name="country">Country</string>
+    <string name="street">Street</string>
+    <string name="town">Town</string>
+    <string name="phone_1">Phone Number *</string>
+    <string name="phone_2">Second Phone</string>
+    <string name="username_or_password_incorrect">Username or Password incorrect</string>
+    <string name="my_address">My Address</string>
+    <string name="comments">Comments</string>
+    <string name="author">Author</string>
+    <string name="disconnection_message">You will be disconnected</string>
+    <string name="disconnection">Disconnection</string>
+
+    <string name="not_text">Write a text</string>
+    <string name="details_job">Details Job</string>
+    <string name="write_your_comment">Write your comment</string>
+
+</resources>

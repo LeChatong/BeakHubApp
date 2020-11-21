@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/saveAddressLayout"
+    tools:context=".Activities.AddAddressActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_add_address"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="@string/add_address"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context=".Activities.AddAddressActivity">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_add_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_address"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:layout_marginStart="25dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/bgBeakHub"
+                android:layout_marginTop="60dp"/>
+
+            <EditText
+                android:id="@+id/et_title_address"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/title_address"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:padding="15dp"
+                android:inputType="text"
+                android:textColor="@color/bgBeakHub"
+                android:background="@drawable/et_inv_custom"
+                android:textColorHint="@color/bgBeakHub"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/et_phone_1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:padding="15dp"
+                android:inputType="phone"
+                android:background="@drawable/et_inv_custom"
+                android:textColorHint="@color/bgBeakHub"
+                android:textColor="@color/bgBeakHub"
+                android:hint="@string/phone_1"
+                android:textSize="15sp"
+                android:focusable="true" />
+
+            <EditText
+                android:id="@+id/et_country"
+                android:layout_width="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:padding="15dp"
+                android:layout_height="50dp"
+                android:inputType="text"
+                android:hint="@string/country"
+                android:background="@drawable/et_inv_custom"
+                android:textColorHint="@color/bgBeakHub"
+                android:textColor="@color/bgBeakHub"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/et_town"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:padding="15dp"
+                android:inputType="text"
+                android:background="@drawable/et_inv_custom"
+                android:textColorHint="@color/bgBeakHub"
+                android:textColor="@color/bgBeakHub"
+                android:hint="@string/town"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/et_street"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:padding="15dp"
+                android:inputType="text"
+                android:background="@drawable/et_inv_custom"
+                android:textColorHint="@color/bgBeakHub"
+                android:textColor="@color/bgBeakHub"
+                android:hint="@string/street"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/et_phone_2"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:padding="15dp"
+                android:inputType="phone"
+                android:background="@drawable/et_inv_custom"
+                android:textColorHint="@color/bgBeakHub"
+                android:textColor="@color/bgBeakHub"
+                android:hint="@string/phone_2"
+                android:textSize="15sp" />
+
+            <Button
+                android:id="@+id/btn_register_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/btn_custom"
+                android:text="@string/save"
+                android:textColor="@android:color/white"
+                tools:ignore="OnClick" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "314051007945",
+    "firebase_url": "https://beakhub-4a1be.firebaseio.com",
+    "project_id": "beakhub-4a1be",
+    "storage_bucket": "beakhub-4a1be.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:314051007945:android:5a48c44579685d16d9c418",
+        "android_client_info": {
+          "package_name": "com.lechatong.beakhub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "314051007945-f1thuefl3j0hjl0imbhglspeqp6ahhjh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZWu_0Ot7J90G1oWQK2etPzxgDJt_0Jvw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "314051007945-f1thuefl3j0hjl0imbhglspeqp6ahhjh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

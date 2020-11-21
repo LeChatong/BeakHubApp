@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/register_job_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.AddJobActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_add_job"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="@string/add_job"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="UselessParent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_add_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_job"
+                android:textAlignment="center"
+                android:textSize="50sp"
+                android:layout_marginStart="25dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/bgBeakHub"
+                android:layout_marginTop="60dp"/>
+
+            <EditText
+                android:id="@+id/et_title_job"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/title"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:padding="15dp"
+                android:inputType="text"
+                android:textColor="@color/bgBeakHub"
+                android:background="@drawable/et_inv_custom"
+                android:textColorHint="@color/bgBeakHub"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/et_desc_job"
+                android:layout_width="match_parent"
+                android:hint="@string/description"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:padding="15dp"
+                android:layout_height="200dp"
+                android:inputType="textNoSuggestions|textMultiLine"
+                android:gravity="top"
+                android:scrollHorizontally="true"
+                android:background="@drawable/et_inv_custom"
+                android:lines="3"
+                android:scrollbarSize="100dp"
+                android:textColorHint="@color/bgBeakHub"
+                android:textColor="@color/bgBeakHub"
+                android:textSize="15sp"/>
+
+            <TextView
+                android:id="@+id/tvCategory"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10dp"
+                android:padding="15dp"
+                android:background="@drawable/et_inv_custom"
+                android:textColorHint="@color/bgBeakHub"
+                android:textColor="@color/bgBeakHub"
+                android:text="@string/category_prompt"
+                android:clickable="true"
+                android:textSize="15sp"
+                android:focusable="true" />
+
+
+            <Button
+                android:id="@+id/btn_register_job"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/btn_custom"
+                android:text="@string/save"
+                android:textColor="@android:color/white"
+                tools:ignore="OnClick" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

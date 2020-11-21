@@ -1,0 +1,64 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="roundedImageViewRounded">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.IconClick" parent="AppTheme">
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:clickable">true</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="AppTheme.TextView_Title.Bold" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textSize">@dimen/text_size_v2</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="AppTheme.TextView_Title.Bold.White" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textSize">@dimen/text_size_v2</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.TextView_Title.White" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textSize">@dimen/text_size_v2</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="AppTheme.TextView_Sub_Title" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textSize">@dimen/text_size_v1</item>
+    </style>
+    <style name="AppTheme.TextView_Sub_Title.White" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:textSize">@dimen/text_size_v1</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="AppTheme.TextView_Sub_Title.Bold" parent="AppTheme.TextView_Sub_Title">
+        <item name="android:textSize">@dimen/text_size_v1</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+    <style name="AppTheme.TextView_Sub_Title.Bold.White" parent="AppTheme.TextView_Sub_Title">
+        <item name="android:textSize">@dimen/text_size_v1</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+
+</resources>

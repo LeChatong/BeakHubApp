@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".Fragments.CommentFragment">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:paddingTop="120dp"
+        android:layout_weight="1">
+
+        <include layout="@layout/comment_recycler_view" />
+
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_marginBottom="3dp"
+        android:background="@android:color/white"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_view"
+            style="@style/AppTheme.IconClick"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:layout_gravity="center"
+            android:padding="@dimen/margin"
+            app:srcCompat="@drawable/ic_profile_add_photo" />
+
+        <EditText
+            android:id="@+id/edit_message"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingStart="@dimen/text_size_v2_5"
+            android:hint="@string/write_your_comment"
+            android:background="@android:color/transparent"
+            android:inputType="text">
+
+            <requestFocus />
+
+        </EditText>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image_send"
+            style="@style/AppTheme.IconClick"
+            android:layout_width="?actionBarSize"
+            android:layout_height="?actionBarSize"
+            android:layout_gravity="center"
+            android:padding="@dimen/margin"
+            app:srcCompat="@drawable/ic_vector_send" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.lechatong.beakhub">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/beak_solo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activities.AddAddressActivity"
+            android:label="@string/add_address"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".Activities.ProfileJobActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.lechatong.beakhub.Activities.ProfileJobActivity" />
+        </activity>
+        <!-- Home Activity -->
+        <activity
+            android:name=".Activities.HomeActivity"
+            android:label="@string/title_activity_home"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- Login Activity -->
+        <activity
+            android:name=".Activities.LoginActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- About Activity -->
+        <!-- Edit User Activity -->
+        <activity
+            android:name=".Activities.EditUserActivity"
+            android:label="@string/edit_user"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <!-- Profile User Activity -->
+        <activity
+            android:name=".Activities.ProfileUserActivity"
+            android:label="@string/profile_user"
+            android:parentActivityName=".Activities.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <!-- Add Job Activity -->
+        <activity
+            android:name=".Activities.AddJobActivity"
+            android:label="@string/add_job"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <!-- Profile Job Activity -->
+        <activity
+            android:name=".Activities.ProfileJobActivity"
+            android:label="@string/title_activity_profile_job"
+            android:parentActivityName=".Activities.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- Register Account Activity -->
+        <activity
+            android:name=".Activities.RegisterAccountActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- Profile Picture Activity -->
+        <activity
+            android:name=".Activities.ProfilePictureActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <!-- Register User Activity -->
+        <activity
+            android:name=".Activities.RegisterUserActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activities.SplashActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>
