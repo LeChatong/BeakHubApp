@@ -21,7 +21,7 @@ public class BhAccount implements Serializable {
 
     @SerializedName("last_login")
     @Expose
-    private Date last_login;
+    private String last_login;
 
     @SerializedName("is_active")
     @Expose
@@ -29,16 +29,16 @@ public class BhAccount implements Serializable {
 
     @SerializedName("created_at")
     @Expose
-    private Date created_at;
+    private String created_at;
 
     @SerializedName("updated_at")
     @Expose
-    private Date updated_at;
+    private String updated_at;
 
     public BhAccount() {
     }
 
-    public BhAccount(Long id, String username, String password, Date last_login, Boolean is_active) {
+    public BhAccount(Long id, String username, String password, String last_login, Boolean is_active) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -70,11 +70,11 @@ public class BhAccount implements Serializable {
         this.password = password;
     }
 
-    public Date getLast_login() {
+    public String getLast_login() {
         return last_login;
     }
 
-    public void setLast_login(Date last_login) {
+    public void setLast_login(String last_login) {
         this.last_login = last_login;
     }
 
@@ -86,19 +86,19 @@ public class BhAccount implements Serializable {
         this.is_active = is_active;
     }
 
-    public Date getCreated_at() {
+    public String getCreated_at() {
         return created_at;
     }
 
-    public void setCreated_at(Date created_at) {
+    public void setCreated_at(String created_at) {
         this.created_at = created_at;
     }
 
-    public Date getUpdated_at() {
+    public String getUpdated_at() {
         return updated_at;
     }
 
-    public void setUpdated_at(Date updated_at) {
+    public void setUpdated_at(String updated_at) {
         this.updated_at = updated_at;
     }
 

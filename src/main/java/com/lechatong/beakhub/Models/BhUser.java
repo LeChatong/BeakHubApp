@@ -48,17 +48,17 @@ public class BhUser implements Serializable {
 
     @SerializedName("created_at")
     @Expose
-    private Date createdAt;
+    private String createdAt;
 
     @SerializedName("updated_at")
     @Expose
-    private Date updatdedAt;
+    private String updatdedAt;
 
     public BhUser() {
     }
 
     public BhUser(Long accountId, String first_name, String last_name, String email, String whatsapp_phone, String phone_number,
-                  String url_picture, Date date_of_birth, Date createdAt, Date updatdedAt) {
+                  String url_picture, Date date_of_birth, String createdAt, String updatdedAt) {
         this.accountId = accountId;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -135,19 +135,19 @@ public class BhUser implements Serializable {
         this.date_of_birth = date_of_birth;
     }
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatdedAt() {
+    public String getUpdatdedAt() {
         return updatdedAt;
     }
 
-    public void setUpdatdedAt(Date updatdedAt) {
+    public void setUpdatdedAt(String updatdedAt) {
         this.updatdedAt = updatdedAt;
     }
 

@@ -37,6 +37,8 @@ import java.util.Random;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class CommentFragment extends Fragment implements ServiceCallback<APIResponse> {
 
     private RecyclerView recyclerCommentView;
@@ -59,6 +61,12 @@ public class CommentFragment extends Fragment implements ServiceCallback<APIResp
 
     private List<BhComment> bhComments;
 
+    private static final String ID_JOB = "JOB_ID";
+
+    private static final String ID_ACCOUNT = "ID_ACCOUNT";
+
+    private static final String PREFS = "PREFS";
+
     public CommentFragment() {
     }
 
@@ -80,8 +88,8 @@ public class CommentFragment extends Fragment implements ServiceCallback<APIResp
         ProfileJobActivity activity = (ProfileJobActivity) getActivity();
 
         assert activity != null;
-        job_id = activity.getJob_id();
-        account_id = activity.getAccount_id();
+        job_id = activity.getSharedPreferences(PREFS, MODE_PRIVATE).getLong(ID_JOB,0);
+        account_id = activity.getSharedPreferences(PREFS, MODE_PRIVATE).getLong(ID_ACCOUNT,0);
 
         this.onApplyViews(view);
 

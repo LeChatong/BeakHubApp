@@ -20,10 +20,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.AddAddressActivity"
+        <activity android:name=".Activities.AccountActivity"
+            android:label="@string/my_account"
+            android:parentActivityName=".Activities.ProfileUserActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Activities.AddAddressActivity"
             android:label="@string/add_address"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".Activities.ProfileJobActivity">
+            android:parentActivityName=".Activities.ProfileJobActivity"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.lechatong.beakhub.Activities.ProfileJobActivity" />
@@ -36,42 +41,37 @@
         <!-- Login Activity -->
         <activity
             android:name=".Activities.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <!-- About Activity -->
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- About Activity -->
         <!-- Edit User Activity -->
         <activity
             android:name=".Activities.EditUserActivity"
             android:label="@string/edit_user"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <!-- Profile User Activity -->
+            android:parentActivityName=".Activities.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- Profile User Activity -->
         <activity
             android:name=".Activities.ProfileUserActivity"
             android:label="@string/profile_user"
             android:parentActivityName=".Activities.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <!-- Add Job Activity -->
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- Add Job Activity -->
         <activity
             android:name=".Activities.AddJobActivity"
             android:label="@string/add_job"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <!-- Profile Job Activity -->
+            android:parentActivityName=".Activities.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- Profile Job Activity -->
         <activity
             android:name=".Activities.ProfileJobActivity"
             android:label="@string/title_activity_profile_job"
             android:parentActivityName=".Activities.HomeActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ForgotPasswordActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <!-- Register Account Activity -->
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- Register Account Activity -->
         <activity
             android:name=".Activities.RegisterAccountActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <!-- Profile Picture Activity -->
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- Profile Picture Activity -->
         <activity
             android:name=".Activities.ProfilePictureActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <!-- Register User Activity -->
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- Register User Activity -->
         <activity
             android:name=".Activities.RegisterUserActivity"
             android:theme="@style/AppTheme.NoActionBar" />

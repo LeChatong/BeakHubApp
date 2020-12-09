@@ -1,5 +1,9 @@
 package com.lechatong.beakhub.Adapter;
 
+/*
+ Author : LeChatong
+ */
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -42,6 +46,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder>{
         holder.tv_job.setText(bhJob.getTitle());
         holder.tv_category.setText(bhJob.getCategory());
         holder.tv_nb_comment.setText(bhJob.getNumber_comment()+ " comments");
+        holder.tv_nb_like.setText(bhJob.getNumber_like() + " likes");
     }
 
     public BhJob getBhJob(int position){
@@ -58,12 +63,14 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder>{
         TextView tv_category;
         TextView tv_desc;
         TextView tv_nb_comment;
+        TextView tv_nb_like;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tv_job = itemView.findViewById(R.id.tv_job);
             tv_category = itemView.findViewById(R.id.tv_category);
             tv_desc = itemView.findViewById(R.id.tv_desc);
             tv_nb_comment = itemView.findViewById(R.id.tv_nb_comment);
+            tv_nb_like = itemView.findViewById(R.id.tv_nb_like);
         }
     }
 

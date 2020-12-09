@@ -1,11 +1,16 @@
 package com.lechatong.beakhub.Tools;
 
+/*
+ Author : LeChatong
+ */
+
 import com.google.gson.internal.LinkedTreeMap;
 import com.lechatong.beakhub.Models.BhAccount;
 import com.lechatong.beakhub.Models.BhAddress;
 import com.lechatong.beakhub.Models.BhComment;
 import com.lechatong.beakhub.Models.BhJob;
 import com.lechatong.beakhub.Models.BhUser;
+import com.lechatong.beakhub.Models.BhUserLikeJob;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,29 +39,15 @@ public class Deserializer {
     public static BhAccount getAccount(Object responseData) {
         Object object = responseData;
         LinkedTreeMap<Object,Object> t = (LinkedTreeMap) object;
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-        Date last_login = null;
-        Date created_at = null;
-        Date updated_at = null;
-
-        try {
-            last_login = formatter.parse(t.get("last_login").toString());
-            created_at = formatter.parse(t.get("created_at").toString());
-            updated_at = formatter.parse(t.get("updated_at").toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
         BhAccount bhAccount = new BhAccount();
 
         bhAccount.setId(Double.valueOf (t.get("id").toString()).longValue());
         bhAccount.setUsername(t.get("username").toString());
         bhAccount.setPassword(t.get("password").toString());
-        bhAccount.setLast_login(last_login);
+        bhAccount.setLast_login(t.get("last_login").toString());
         bhAccount.setIs_active(Boolean.parseBoolean(t.get("is_active").toString()));
-        bhAccount.setCreated_at(created_at);
-        bhAccount.setUpdated_at(updated_at);
+        bhAccount.setCreated_at(t.get("created_at").toString());
+        bhAccount.setUpdated_at(t.get("updated_at").toString());
 
         return bhAccount;
     }
@@ -64,18 +55,6 @@ public class Deserializer {
     public static BhJob getJob(Object responseData){
         Object object = responseData;
         LinkedTreeMap<Object,Object> t = (LinkedTreeMap) object;
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-
-        Date created_at = null;
-        Date updated_at = null;
-
-        /*try {
-            created_at = formatter.parse(t.get("created_at").toString());
-            updated_at = formatter.parse(t.get("updated_at").toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }*/
 
         BhJob bhJob = new BhJob();
 
@@ -88,26 +67,15 @@ public class Deserializer {
         bhJob.setUserId(Double.valueOf (t.get("user_id").toString()).longValue());
         bhJob.setIsActive(Boolean.parseBoolean(t.get("is_active").toString()));
         bhJob.setNumber_comment(Double.valueOf (t.get("number_comment").toString()).longValue());
-        bhJob.setCreatedAt(created_at);
-        bhJob.setUpdatedAt(updated_at);
+        bhJob.setNumber_like(Double.valueOf (t.get("number_like").toString()).longValue());
+        bhJob.setCreatedAt(t.get("created_at").toString());
+        bhJob.setUpdatedAt(t.get("updated_at").toString());
         return bhJob;
     }
 
     public static BhAddress getAddress(Object responseData){
         Object object = responseData;
         LinkedTreeMap<Object,Object> t = (LinkedTreeMap) object;
-
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-
-        Date created_at = null;
-        Date updated_at = null;
-
-        try {
-            created_at = formatter.parse(t.get("created_at").toString());
-            updated_at = formatter.parse(t.get("updated_at").toString());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
 
         BhAddress bhAddress = new BhAddress();
 
@@ -135,8 +103,8 @@ public class Deserializer {
         bhAddress.setActive(Boolean.parseBoolean(t.get("is_active").toString()));
         bhAddress.setJob(t.get("job").toString());
         bhAddress.setJobId(Double.valueOf (t.get("job_id").toString()).longValue());
-        bhAddress.setCreatedAt(created_at);
-        bhAddress.setUpdatedAt(updated_at);
+        bhAddress.setCreatedAt(t.get("created_at").toString());
+        bhAddress.setUpdatedAt(t.get("updated_at").toString());
         return bhAddress;
     }
 
@@ -156,5 +124,23 @@ public class Deserializer {
         bhComment.setCreated_at(t.get("created_at").toString());
         bhComment.setUpdated_at(t.get("updated_at").toString());
         return bhComment;
+    }
+
+    public static BhUserLikeJob getUserLikeJob(Object responseData){
+        Object object = responseData;
+        LinkedTreeMap<Object,Object> t = (LinkedTreeMap) object;
+
+        BhUserLikeJob bhUserLikeJob = new BhUserLikeJob();
+
+        bhUserLikeJob.setId(Double.valueOf (t.get("id").toString()).longValue());
+        bhUserLikeJob.setIsLike(Boolean.parseBoolean(t.get("is_like").toString()));
+        bhUserLikeJob.setJob(t.get("job").toString());
+        bhUserLikeJob.setJobId(Double.valueOf (t.get("job_id").toString()).longValue());
+        bhUserLikeJob.setUser(t.get("user").toString());
+        bhUserLikeJob.setUserId(Double.valueOf (t.get("user_id").toString()).longValue());
+        bhUserLikeJob.setCreatedAt(t.get("created_at").toString());
+        bhUserLikeJob.setUpdatedAt(t.get("updated_at").toString());
+
+        return bhUserLikeJob;
     }
 }

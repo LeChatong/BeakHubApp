@@ -35,7 +35,7 @@ public class ProfileUserActivity extends AppCompatActivity implements ServiceCal
 
     Context context;
 
-    private TextView tv_email_user, tv_last_name_user, tv_first_name_user, tv_phone_number, tv_username, tv_last_connection;
+    private TextView tv_email_user, tv_last_name_user, tv_first_name_user, tv_phone_number, tv_username, tv_my_account;
 
     private ImageView imgProfile;
 
@@ -62,17 +62,11 @@ public class ProfileUserActivity extends AppCompatActivity implements ServiceCal
 
         account_id = sharedPreferences.getLong(ID_ACCOUNT, 0);
 
-        /*Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            account_id = extras.getLong("account_id");
-        }*/
-
         tv_email_user = (TextView) findViewById(R.id.tv_email_user);
         tv_last_name_user = (TextView) findViewById(R.id.tv_last_name_user);
         tv_first_name_user = (TextView) findViewById(R.id.tv_first_name_user);
         tv_phone_number = (TextView) findViewById(R.id.tv_phone_number);
-        tv_username= (TextView) findViewById(R.id.tv_username);
-        //tv_last_connection = (TextView) findViewById(R.id.tv_last_connection);
+        tv_my_account = (TextView) findViewById(R.id.tvAccount);
 
         imgProfile = (ImageView) findViewById(R.id.img_profile);
         imgProfile.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +76,15 @@ public class ProfileUserActivity extends AppCompatActivity implements ServiceCal
                 Bundle bundle = new Bundle();
                 bundle.putLong("account_id", account_id);
                 intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        tv_my_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(context, AccountActivity.class);
+                Bundle bundle = new Bundle();
                 startActivity(intent);
             }
         });
@@ -107,8 +110,7 @@ public class ProfileUserActivity extends AppCompatActivity implements ServiceCal
         tv_last_name_user.setText(bhUser.getLast_name());
         tv_first_name_user.setText(bhUser.getFirst_name());
         tv_phone_number.setText(bhUser.getPhone_number());
-        //tv_username.setText(bhUser.getAccount().getUsername());
-        //tv_last_connection.setText((new SimpleDateFormat("dd/mm/yyyy hh:mm", Locale.CANADA_FRENCH)).format(bhUser.getAccount().getLastLogin()));
+
         if (!bhUser.getUrl_picture().isEmpty()){
             Picasso.with(context)
                     .load(bhUser.getUrl_picture())

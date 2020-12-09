@@ -1,5 +1,9 @@
 package com.lechatong.beakhub.Activities;
 
+/*
+ * Author : LeChatong
+ */
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;

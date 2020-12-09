@@ -1,31 +1,27 @@
 package com.lechatong.beakhub.WebService;
 
+/*
+ * Author : LeChatong
+ */
+
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.lechatong.beakhub.Entities.Address;
 import com.lechatong.beakhub.Entities.Comment;
 import com.lechatong.beakhub.Entities.Job;
 import com.lechatong.beakhub.Entities.User;
+import com.lechatong.beakhub.Entities.UserLikeJob;
 import com.lechatong.beakhub.Models.BhAccount;
-import com.lechatong.beakhub.Models.BhAddress;
-import com.lechatong.beakhub.Models.BhCategory;
-import com.lechatong.beakhub.Models.BhJob;
-import com.lechatong.beakhub.Models.BhUser;
 import com.lechatong.beakhub.Tools.APIResponse;
 import com.lechatong.beakhub.Tools.ServiceCallback;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class BeakHubService {
 
@@ -276,6 +272,50 @@ public class BeakHubService {
         IBeakHubService iBeakHubService = IBeakHubService.retrofit.create(IBeakHubService.class);
 
         Call<APIResponse> call = iBeakHubService.addComment(comment);
+
+        call.enqueue(new Callback<APIResponse>() {
+            @Override
+            public void onResponse(Call<APIResponse> call, Response<APIResponse> response) {
+                if(callbacksWeakReference.get() != null)
+                    callbacksWeakReference.get().success(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<APIResponse> call, Throwable t) {
+                if(callbacksWeakReference.get() != null)
+                    callbacksWeakReference.get().error(t);
+            }
+        });
+    }
+
+    public static void addLike(ServiceCallback<APIResponse> callbacks, UserLikeJob userLikeJob){
+        final WeakReference<ServiceCallback<APIResponse>> callbacksWeakReference = new WeakReference<ServiceCallback<APIResponse>>(callbacks);
+
+        IBeakHubService iBeakHubService = IBeakHubService.retrofit.create(IBeakHubService.class);
+
+        Call<APIResponse> call = iBeakHubService.addLike(userLikeJob);
+
+        call.enqueue(new Callback<APIResponse>() {
+            @Override
+            public void onResponse(Call<APIResponse> call, Response<APIResponse> response) {
+                if(callbacksWeakReference.get() != null)
+                    callbacksWeakReference.get().success(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<APIResponse> call, Throwable t) {
+                if(callbacksWeakReference.get() != null)
+                    callbacksWeakReference.get().error(t);
+            }
+        });
+    }
+
+    public static void updateLike(ServiceCallback<APIResponse> callbacks, Long like_id, UserLikeJob userLikeJob){
+        final WeakReference<ServiceCallback<APIResponse>> callbacksWeakReference = new WeakReference<ServiceCallback<APIResponse>>(callbacks);
+
+        IBeakHubService iBeakHubService = IBeakHubService.retrofit.create(IBeakHubService.class);
+
+        Call<APIResponse> call = iBeakHubService.updateLike(like_id, userLikeJob);
 
         call.enqueue(new Callback<APIResponse>() {
             @Override

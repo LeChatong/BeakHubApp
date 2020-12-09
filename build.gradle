@@ -59,4 +59,5 @@ dependencies {
 
     //FIREBASE
     implementation 'com.google.firebase:firebase-bom:26.1.0'
+    implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 }

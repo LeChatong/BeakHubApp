@@ -1,5 +1,9 @@
 package com.lechatong.beakhub.Models;
 
+/*
+ * Author : LeChatong
+ */
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -21,10 +25,10 @@ public class BhJob {
     private Boolean isActive;
     @SerializedName("created_at")
     @Expose
-    private Date createdAt;
+    private String createdAt;
     @SerializedName("updated_at")
     @Expose
-    private Date updatedAt;
+    private String updatedAt;
     @SerializedName("user")
     @Expose
     private String user;
@@ -40,6 +44,9 @@ public class BhJob {
     @SerializedName("number_comment")
     @Expose
     private Long number_comment;
+    @SerializedName("number_like")
+    @Expose
+    private Long number_like;
 
     public Long getId() {
         return id;
@@ -73,19 +80,19 @@ public class BhJob {
         this.isActive = isActive;
     }
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
+    public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
     }
 
@@ -127,5 +134,13 @@ public class BhJob {
 
     public void setNumber_comment(Long number_comment) {
         this.number_comment = number_comment;
+    }
+
+    public Long getNumber_like() {
+        return number_like;
+    }
+
+    public void setNumber_like(Long number_like) {
+        this.number_like = number_like;
     }
 }

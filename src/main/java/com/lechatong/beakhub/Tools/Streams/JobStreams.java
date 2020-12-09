@@ -22,6 +22,14 @@ public class JobStreams {
                 .timeout(20, TimeUnit.SECONDS);
     }
 
+    public static Observable<APIResponse> streamOneJob(Long idJob){
+        IBeakHubService iBeakHubService = IBeakHubService.retrofit.create(IBeakHubService.class);
+
+        return iBeakHubService.getOneJob(idJob).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(20, TimeUnit.SECONDS);
+    }
+
     public static Observable<APIResponse> streamJobSearch(String search){
         IBeakHubService iBeakHubService = IBeakHubService.retrofit.create(IBeakHubService.class);
 

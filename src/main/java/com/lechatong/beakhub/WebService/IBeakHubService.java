@@ -1,9 +1,14 @@
 package com.lechatong.beakhub.WebService;
 
+/*
+ * Author : LeChatong
+ */
+
 import com.lechatong.beakhub.Entities.Address;
 import com.lechatong.beakhub.Entities.Comment;
 import com.lechatong.beakhub.Entities.Job;
 import com.lechatong.beakhub.Entities.User;
+import com.lechatong.beakhub.Entities.UserLikeJob;
 import com.lechatong.beakhub.Models.BhAccount;
 import com.lechatong.beakhub.Models.BhAddress;
 import com.lechatong.beakhub.Models.BhCategory;
@@ -91,6 +96,9 @@ public interface IBeakHubService {
     @GET("jobs/{job_id}")
     Call<APIResponse> getJobById(@Path("job_id") Long job_id);
 
+    @GET("jobs/{job_id}")
+    Observable<APIResponse> getOneJob(@Path("job_id") Long job_id);
+
     @GET("address/job/{id_job}")
     Observable<APIResponse> getAddressByIdJob(@Path("id_job") Long id_job);
 
@@ -108,5 +116,14 @@ public interface IBeakHubService {
 
     @GET("comments/job/{id_job}")
     Observable<APIResponse> getAllCommentByJob(@Path("id_job") Long id_job);
+
+    @POST("likes/jobs/all")
+    Call<APIResponse> addLike(@Body UserLikeJob userLikeJob);
+
+    @PUT("likes/jobs/details/{like_id}")
+    Call<APIResponse> updateLike(@Path("like_id") Long like_id,@Body UserLikeJob userLikeJob);
+
+    @GET("likes/job/{job_id}/user/{user_id}")
+    Observable<APIResponse> getOneLikeByIdJobAndIdUser(@Path("job_id") Long job_id, @Path("user_id") Long user_id);
 
 }

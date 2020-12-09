@@ -130,5 +130,6 @@
     <string name="not_text">Write a text</string>
     <string name="details_job">Details Job</string>
     <string name="write_your_comment">Write your comment</string>
+    <string name="my_account">My Account</string>
 
 </resources>

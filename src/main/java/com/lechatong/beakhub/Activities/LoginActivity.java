@@ -1,5 +1,9 @@
 package com.lechatong.beakhub.Activities;
 
+/*
+  Author : LeChatong
+ */
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
@@ -24,6 +28,7 @@ import com.lechatong.beakhub.Models.BhAccount;
 import com.lechatong.beakhub.Models.BhUser;
 import com.lechatong.beakhub.R;
 import com.lechatong.beakhub.Tools.APIResponse;
+import com.lechatong.beakhub.Tools.Deserializer;
 import com.lechatong.beakhub.Tools.ServiceCallback;
 import com.lechatong.beakhub.Tools.Tools;
 import com.lechatong.beakhub.WebService.BeakHubService;
@@ -158,24 +163,21 @@ public class LoginActivity extends AppCompatActivity implements ServiceCallback<
                     .show();
         }else if(value.getCODE() == 200){
             progressDialog.cancel();
-            ArrayList<BhAccount> accountList = (ArrayList<BhAccount>) value.getDATA();
-            Object account = accountList.get(0);
-            LinkedTreeMap<Object,Object> t = (LinkedTreeMap) account;
+            BhAccount account = Deserializer.getAccount(value.getDATA());
             intent = new Intent(context,HomeActivity.class);
             Bundle bundle = new Bundle();
-            bundle.putLong("account_id", (Double.valueOf (t.get("id").toString()).longValue()));
+            bundle.putLong("account_id", account.getId());
 
             sharedPreferences
                     .edit()
-                    .putLong(ID_ACCOUNT, (Double.valueOf (t.get("id").toString()).longValue()))
-                    .putString(USERNAME, t.get("username").toString())
+                    .putLong(ID_ACCOUNT, account.getId())
+                    .putString(USERNAME, account.getUsername())
                     .apply();
 
             intent.putExtras(bundle);
             startActivity(intent);
             finish();
         }
-
     }
 
     @Override

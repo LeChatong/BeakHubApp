@@ -117,6 +117,21 @@
         </RelativeLayout>
 
     </LinearLayout>
+    <com.like.LikeButton
+        app:circle_start_color="@color/colorPrimary"
+        app:like_drawable="@drawable/ic_star_bh_on_24dp"
+        app:unlike_drawable="@drawable/ic_star_bh_off_24dp"
+        app:dots_primary_color="@color/colorPrimary"
+        app:dots_secondary_color="@color/colorPrimary"
+        app:circle_end_color="@color/colorPrimary"
+        app:icon_size="50dp"
+        app:anim_scale_factor="2"
+        app:is_enabled="true"
+        android:id="@+id/btn_like"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content" />
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_edit_job"
         android:layout_width="wrap_content"

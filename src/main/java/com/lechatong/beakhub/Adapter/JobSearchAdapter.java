@@ -31,6 +31,7 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
         TextView categoryJob;
         TextView user;
         TextView nbComment;
+        TextView nbLike;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -39,6 +40,7 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
             categoryJob = (TextView) itemView.findViewById(R.id.tv_category_search);
             user = (TextView) itemView.findViewById(R.id.tv_user);
             nbComment = (TextView) itemView.findViewById(R.id.tv_search_nb_comment);
+            nbLike = (TextView) itemView.findViewById(R.id.tv_search_nb_like);
         }
 
     }
@@ -62,6 +64,7 @@ public class JobSearchAdapter extends RecyclerView.Adapter<JobSearchAdapter.View
         holder.categoryJob.setText(bhJob.getCategory());
         holder.user.setText(bhJob.getUser());
         holder.nbComment.setText(bhJob.getNumber_comment() + " comments");
+        holder.nbLike.setText(bhJob.getNumber_like() + " like");
     }
 
     @Override

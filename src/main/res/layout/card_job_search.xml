@@ -80,14 +80,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="5dp"
             android:orientation="horizontal">
-            <ImageView
+            <!--<ImageView
                 android:id="@+id/img_like"
                 android:layout_height="20dp"
                 android:layout_width="20dp"
                 android:layout_marginTop="1dp"
-                android:src="@drawable/ic_star_border_bh_24dp"/>
+                android:src="@drawable/ic_star_border_bh_24dp"/>-->
             <TextView
-                android:id="@+id/tv_like"
+                android:id="@+id/tv_search_nb_like"
                 android:layout_width="60dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="1dp"
@@ -96,12 +96,12 @@
                 android:layout_marginBottom="16dp"
                 android:textColor="@color/bgBeakHub"
                 android:text="@string/example_likes"/>
-            <ImageView
+            <!--<ImageView
                 android:id="@+id/img_comment"
                 android:layout_height="20dp"
                 android:layout_width="20dp"
                 android:layout_marginTop="1dp"
-                android:src="@drawable/ic_textsms_bh_24dp"/>
+                android:src="@drawable/ic_textsms_bh_24dp"/>-->
             <TextView
                 android:id="@+id/tv_search_nb_comment"
                 android:layout_width="match_parent"

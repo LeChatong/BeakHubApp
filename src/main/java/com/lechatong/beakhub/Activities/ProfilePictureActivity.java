@@ -1,5 +1,9 @@
 package com.lechatong.beakhub.Activities;
 
+/*
+ * Author : LeChatong
+ */
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +32,7 @@ import com.lechatong.beakhub.Tools.APIResponse;
 import com.lechatong.beakhub.Tools.CircleTransform;
 import com.lechatong.beakhub.Tools.Deserializer;
 import com.lechatong.beakhub.Tools.ServiceCallback;
-import com.lechatong.beakhub.Tools.Streams.UserStream;
+import com.lechatong.beakhub.Tools.Streams.UserStreams;
 import com.lechatong.beakhub.WebService.BeakHubService;
 import com.squareup.picasso.Picasso;
 
@@ -271,7 +275,7 @@ public class ProfilePictureActivity extends AppCompatActivity implements View.On
     }
 
     private void loadUser(){
-        this.disposable = UserStream.streamOneUserById(account_id)
+        this.disposable = UserStreams.streamOneUserById(account_id)
                 .subscribeWith(new DisposableObserver<APIResponse>(){
 
                     @Override

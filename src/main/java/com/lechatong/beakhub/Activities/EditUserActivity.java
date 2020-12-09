@@ -21,7 +21,7 @@ import com.lechatong.beakhub.R;
 import com.lechatong.beakhub.Tools.APIResponse;
 import com.lechatong.beakhub.Tools.Deserializer;
 import com.lechatong.beakhub.Tools.ServiceCallback;
-import com.lechatong.beakhub.Tools.Streams.UserStream;
+import com.lechatong.beakhub.Tools.Streams.UserStreams;
 import com.lechatong.beakhub.Tools.Tools;
 import com.lechatong.beakhub.WebService.BeakHubService;
 
@@ -168,7 +168,7 @@ public class EditUserActivity extends AppCompatActivity implements ServiceCallba
     }
 
     private void loadUser(){
-        this.disposable = UserStream.streamOneUserById(account_id)
+        this.disposable = UserStreams.streamOneUserById(account_id)
                 .subscribeWith(new DisposableObserver<APIResponse>(){
 
                     @Override
