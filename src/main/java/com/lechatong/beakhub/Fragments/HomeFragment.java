@@ -1,5 +1,9 @@
 package com.lechatong.beakhub.Fragments;
 
+/**
+ * Author: LeChatong
+ * Desc: This Fragment list all activities on the user connected
+ */
 
 import android.content.Context;
 import android.content.Intent;

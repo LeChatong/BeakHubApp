@@ -1,10 +1,13 @@
 package com.lechatong.beakhub.Models;
 
+/**
+ * Author: LeChatong
+ */
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.lechatong.beakhub.Entities.Account;
 
-import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 

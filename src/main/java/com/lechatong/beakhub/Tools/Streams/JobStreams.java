@@ -1,5 +1,10 @@
 package com.lechatong.beakhub.Tools.Streams;
 
+/**
+ * Author: LeChatong
+ * Desc: This class provides a method who allow to have a jobs according to parameters
+ */
+
 import com.lechatong.beakhub.Models.BhJob;
 import com.lechatong.beakhub.Tools.APIResponse;
 import com.lechatong.beakhub.WebService.IBeakHubService;
@@ -13,7 +18,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class JobStreams {
-
+    /**
+     * Get the Job by a User
+     * @param idUser
+     * @return Observable<APIResponse>
+     */
     public static Observable<APIResponse> streamJobByUserId(Long idUser){
         IBeakHubService iBeakHubService = IBeakHubService.retrofit.create(IBeakHubService.class);
 
@@ -22,6 +31,11 @@ public class JobStreams {
                 .timeout(20, TimeUnit.SECONDS);
     }
 
+    /**
+     * Get one Job
+     * @param idJob
+     * @return Observable<APIResponse>
+     */
     public static Observable<APIResponse> streamOneJob(Long idJob){
         IBeakHubService iBeakHubService = IBeakHubService.retrofit.create(IBeakHubService.class);
 
@@ -30,6 +44,11 @@ public class JobStreams {
                 .timeout(20, TimeUnit.SECONDS);
     }
 
+    /**
+     * Get the Jobs with a research (the research is made on the attribute 'title' for the time being
+     * @param search
+     * @return Observable<APIResponse>
+     */
     public static Observable<APIResponse> streamJobSearch(String search){
         IBeakHubService iBeakHubService = IBeakHubService.retrofit.create(IBeakHubService.class);
 

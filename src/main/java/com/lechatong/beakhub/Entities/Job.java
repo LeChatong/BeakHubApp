@@ -1,6 +1,7 @@
 package com.lechatong.beakhub.Entities;
 
 public class Job {
+    private Long id;
     private String title;
     private String description;
     private Boolean is_active;
@@ -16,6 +17,14 @@ public class Job {
         this.is_active = is_active;
         this.user_id = user_id;
         this.category_id = category_id;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {

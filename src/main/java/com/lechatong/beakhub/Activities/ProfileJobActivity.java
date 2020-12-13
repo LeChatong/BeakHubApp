@@ -2,6 +2,8 @@ package com.lechatong.beakhub.Activities;
 
 /*
  * Author : LeChatong
+ * Desc : This Activity is use for show details of Job with the help of
+ * fragments JobFragment, AdressFragment, CommentFragment
  */
 
 import android.content.Context;

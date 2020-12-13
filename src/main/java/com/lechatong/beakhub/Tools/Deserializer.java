@@ -8,6 +8,7 @@ import com.google.gson.internal.LinkedTreeMap;
 import com.lechatong.beakhub.Models.BhAccount;
 import com.lechatong.beakhub.Models.BhAddress;
 import com.lechatong.beakhub.Models.BhComment;
+import com.lechatong.beakhub.Models.BhEvent;
 import com.lechatong.beakhub.Models.BhJob;
 import com.lechatong.beakhub.Models.BhUser;
 import com.lechatong.beakhub.Models.BhUserLikeJob;
@@ -142,5 +143,23 @@ public class Deserializer {
         bhUserLikeJob.setUpdatedAt(t.get("updated_at").toString());
 
         return bhUserLikeJob;
+    }
+
+    public static BhEvent getEvent(Object responseData){
+        Object object = responseData;
+        LinkedTreeMap<Object,Object> t = (LinkedTreeMap) object;
+
+        BhEvent bhEvent = new BhEvent();
+
+        bhEvent.setId(Double.valueOf (t.get("id").toString()).longValue());
+        bhEvent.setAction(t.get("action").toString());
+        bhEvent.setRecieverId(Double.valueOf (t.get("reciever_id").toString()).longValue());
+        bhEvent.setSenderId(Double.valueOf (t.get("sender_id").toString()).longValue());
+        bhEvent.setJobId(Double.valueOf (t.get("job_id").toString()).longValue());
+        bhEvent.setIsView(Boolean.parseBoolean(t.get("is_view").toString()));
+        bhEvent.setCreatedAt(t.get("created_at").toString());
+        bhEvent.setUpdatedAt(t.get("updated_at").toString());
+
+        return  bhEvent;
     }
 }

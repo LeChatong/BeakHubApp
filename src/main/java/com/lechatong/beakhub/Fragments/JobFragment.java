@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.lechatong.beakhub.Activities.AddJobActivity;
 import com.lechatong.beakhub.Activities.ProfileJobActivity;
 import com.lechatong.beakhub.Entities.UserLikeJob;
 import com.lechatong.beakhub.Models.BhJob;
@@ -100,6 +101,13 @@ public class JobFragment extends Fragment implements ServiceCallback<APIResponse
 
         this.configurationLikeButton();
 
+        btnEditJob.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intent = new Intent(getActivity(), AddJobActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return view;
     }

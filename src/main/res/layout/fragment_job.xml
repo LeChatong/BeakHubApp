@@ -139,5 +139,5 @@
         android:layout_gravity="bottom|end"
         app:backgroundTint="@color/bgBeakHub"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@drawable/ic_add_white_24dp" />
+        app:srcCompat="@drawable/ic_mode_edit_white_24dp" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

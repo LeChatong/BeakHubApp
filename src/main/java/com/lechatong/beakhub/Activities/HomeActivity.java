@@ -2,6 +2,7 @@ package com.lechatong.beakhub.Activities;
 
 /*
  * Author : LeChatong
+ * Desc : Main Activity
  */
 
 import android.annotation.SuppressLint;

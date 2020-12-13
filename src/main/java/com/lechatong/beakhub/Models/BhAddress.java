@@ -1,9 +1,11 @@
 package com.lechatong.beakhub.Models;
 
+/**
+ * Author: LeChatong
+ */
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.Date;
 
 public class BhAddress {
 

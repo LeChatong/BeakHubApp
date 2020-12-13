@@ -1,5 +1,10 @@
 package com.lechatong.beakhub.Activities;
 
+/**
+ * Author : LeChatong
+ * Desc: This Activity allow to save or edit Job
+ */
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -10,7 +15,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,10 +28,13 @@ import com.google.android.material.snackbar.Snackbar;
 import com.lechatong.beakhub.Adapter.CategoryAdapter;
 import com.lechatong.beakhub.Entities.Job;
 import com.lechatong.beakhub.Models.BhCategory;
+import com.lechatong.beakhub.Models.BhJob;
 import com.lechatong.beakhub.R;
 import com.lechatong.beakhub.Tools.APIResponse;
+import com.lechatong.beakhub.Tools.Deserializer;
 import com.lechatong.beakhub.Tools.ServiceCallback;
 import com.lechatong.beakhub.Tools.Streams.CategoryStreams;
+import com.lechatong.beakhub.Tools.Streams.JobStreams;
 import com.lechatong.beakhub.Tools.Tools;
 import com.lechatong.beakhub.WebService.BeakHubService;
 
@@ -49,6 +59,8 @@ public class AddJobActivity extends AppCompatActivity implements ServiceCallback
 
     private Disposable disposable;
 
+    private Disposable disposableJob;
+
     private EditText etTitleJob;
 
     private EditText etDescJob;
@@ -65,7 +77,17 @@ public class AddJobActivity extends AppCompatActivity implements ServiceCallback
 
     private Job bhJob;
 
+    private Long job_id;
+
     private Toolbar toolbar;
+
+    private static final String ID_JOB = "JOB_ID";
+
+    private static final String ID_ACCOUNT = "ID_ACCOUNT";
+
+    private static final String PREFS = "PREFS";
+
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,19 +109,33 @@ public class AddJobActivity extends AppCompatActivity implements ServiceCallback
         tvCategory = (TextView) findViewById(R.id.tvCategory);
         saveJoblayout = (CoordinatorLayout) findViewById(R.id.register_job_layout);
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            account_id = extras.getLong("account_id");
-        }
-
-        this.loadCategory();
-
         tvCategory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 obtainCategory();
             }
         });
+
+        sharedPreferences = getBaseContext().getSharedPreferences(PREFS, MODE_PRIVATE);
+
+        try {
+            job_id = sharedPreferences.getLong(ID_JOB, 0);
+        }catch (NullPointerException e){
+            Log.d("NO_JOB", "NOT JOB SELECTED");
+        }
+
+        account_id = sharedPreferences.getLong(ID_ACCOUNT, 0);
+
+        if(job_id != null){
+            loadJob();
+            toolbar.setTitle(R.string.edit_job);
+        }else{
+
+        }
+
+        this.loadCategory();
+
+
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
@@ -151,8 +187,13 @@ public class AddJobActivity extends AppCompatActivity implements ServiceCallback
         this.disposeWhenDestroy();
     }
 
-    public void saveJob(Job bhJob){
-        BeakHubService.addJob(this, bhJob);
+    public void saveJob(Job job){
+        if(job_id != null){
+            BeakHubService.editJob(this, job_id, job);
+        }else{
+            BeakHubService.addJob(this, job);
+        }
+
     }
 
     @Override
@@ -197,14 +238,44 @@ public class AddJobActivity extends AppCompatActivity implements ServiceCallback
                 });
     }
 
+    private void loadJob(){
+        this.disposableJob = JobStreams.streamOneJob(job_id)
+                .subscribeWith(new DisposableObserver<APIResponse>(){
+                    @Override
+                    public void onNext(APIResponse response) {
+                        if (response.getCODE()== 200){
+                            BhJob bhJob = Deserializer.getJob(response.getDATA());
+                            initField(bhJob);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
     private void updateCategoryAdapter(List<BhCategory> bhCategories){
         this.categoryList = new ArrayList<>();
         categoryList.addAll(bhCategories);
         this.categoryAdapter = new CategoryAdapter(this,R.layout.spin_category,categoryList);
     }
 
+    private void initField(BhJob bhJob){
+        etDescJob.setText(bhJob.getDescription());
+        etTitleJob.setText(bhJob.getTitle());
+        tvCategory.setText(bhJob.getCategory());
+    }
+
     private void disposeWhenDestroy(){
         if (this.disposable != null && !this.disposable.isDisposed()) this.disposable.dispose();
+        if (this.disposableJob != null && !this.disposableJob.isDisposed()) this.disposableJob.dispose();
     }
 
     private void obtainCategory(){
@@ -212,7 +283,7 @@ public class AddJobActivity extends AppCompatActivity implements ServiceCallback
 
         builder.setTitle(R.string.category_prompt);
 
-        builder.setSingleChoiceItems(categoryAdapter, -1, new DialogInterface.OnClickListener() {
+        builder.setSingleChoiceItems(categoryAdapter, 1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 BhCategory bhCategory = categoryAdapter.getItem(i);

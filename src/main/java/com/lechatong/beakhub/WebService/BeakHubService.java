@@ -1,7 +1,8 @@
 package com.lechatong.beakhub.WebService;
 
-/*
+/**
  * Author : LeChatong
+ * Desc: Class of service who consume the Web service
  */
 
 import android.util.Log;
@@ -197,7 +198,28 @@ public class BeakHubService {
                     callbacksWeakReference.get().error(t);
             }
         });
+    }
 
+    public static void editJob(ServiceCallback<APIResponse> callbacks, Long job_id, Job job){
+        final WeakReference<ServiceCallback<APIResponse>> callbacksWeakReference = new WeakReference<ServiceCallback<APIResponse>>(callbacks);
+
+        IBeakHubService iBeakHubService = IBeakHubService.retrofit.create(IBeakHubService.class);
+
+        Call<APIResponse> call = iBeakHubService.updateJob(job_id,job);
+
+        call.enqueue(new Callback<APIResponse>() {
+            @Override
+            public void onResponse(Call<APIResponse> call, Response<APIResponse> response) {
+                if(callbacksWeakReference.get() != null)
+                    callbacksWeakReference.get().success(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<APIResponse> call, Throwable t) {
+                if(callbacksWeakReference.get() != null)
+                    callbacksWeakReference.get().error(t);
+            }
+        });
     }
 
     public static void addAddress(ServiceCallback<APIResponse> callbacks, Address address){

@@ -1,10 +1,16 @@
 package com.lechatong.beakhub.Fragments;
+/**
+ * Author: LeChatong
+ * Desc: Fragment show all address on a job
+ */
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -167,6 +173,34 @@ public class AddressFragment extends Fragment {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         /**/
+                    }
+                })
+                .setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
+                    @Override
+                    public boolean onItemLongClicked(RecyclerView recyclerView, int position, View v) {
+
+                        final CharSequence[] menus = {
+                                getString(R.string.edit_address) ,
+                                getString(R.string.show_address),
+                                getString(R.string.cancel)
+                        };
+
+                        new AlertDialog.Builder(context)
+                                .setItems(menus, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        if (menus[i].equals(getString(R.string.cancel))){
+                                            dialogInterface.dismiss();
+                                        }else if (menus[i].equals(getString(R.string.edit_address))){
+
+                                        }else if (menus[i].equals(getString(R.string.show_address))){
+
+                                        }
+                                    }
+                                })
+                                .setTitle(R.string.menu)
+                                .show();
+                        return false;
                     }
                 });
     }
