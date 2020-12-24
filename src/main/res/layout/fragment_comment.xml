@@ -39,9 +39,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingStart="@dimen/text_size_v2_5"
+            android:inputType="textNoSuggestions|textMultiLine"
             android:hint="@string/write_your_comment"
-            android:background="@android:color/transparent"
-            android:inputType="text">
+            android:background="@android:color/transparent">
 
             <requestFocus />
 

@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".Fragments.HomeFragment">
+    tools:context=".Fragments.MyJobsFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/tvHomeJob"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center|center_vertical"
+        android:text="@string/no_job_for_user" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,7 +26,7 @@
             android:layout_height="wrap_content">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view"
+                android:id="@+id/recycler_view_my_job"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
@@ -25,14 +34,13 @@
 
     </LinearLayout>
 
-    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add_job"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="@color/bgBeakHub"
-        app:srcCompat="@drawable/ic_add_white_24dp" />-->
+        app:srcCompat="@drawable/ic_add_white_24dp" />
 
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</FrameLayout>

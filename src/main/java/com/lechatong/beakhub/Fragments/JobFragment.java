@@ -5,20 +5,26 @@ package com.lechatong.beakhub.Fragments;
  */
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.lechatong.beakhub.Activities.AddJobActivity;
 import com.lechatong.beakhub.Activities.ProfileJobActivity;
+import com.lechatong.beakhub.Entities.Job;
 import com.lechatong.beakhub.Entities.UserLikeJob;
 import com.lechatong.beakhub.Models.BhJob;
 import com.lechatong.beakhub.Models.BhUserLikeJob;
@@ -53,7 +59,7 @@ public class JobFragment extends Fragment implements ServiceCallback<APIResponse
 
     private static final String PREFS = "PREFS";
 
-    private TextView tv_title, tv_description, tv_category, tv_user;
+    private TextView tv_title, tv_description, tv_category, tv_user, tvCreateJob;
 
     private BhUserLikeJob like;
 
@@ -67,11 +73,19 @@ public class JobFragment extends Fragment implements ServiceCallback<APIResponse
 
     private Disposable disposableJob;
 
+    private Button btn_deactivatejob;
+
     public JobFragment() {
     }
 
     public static JobFragment newInstance() {
         return new JobFragment();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        context = getActivity();
     }
 
     @Override
@@ -90,16 +104,12 @@ public class JobFragment extends Fragment implements ServiceCallback<APIResponse
         tv_description = (TextView) view.findViewById(R.id.tvDescriptionJob);
         tv_category = (TextView) view.findViewById(R.id.tvCategoryJob);
         tv_user = (TextView) view.findViewById(R.id.tvUSerJob);
+        tvCreateJob = (TextView) view.findViewById(R.id.tvCreateJob);
+        btn_deactivatejob = view.findViewById(R.id.btn_deactivatejob);
         btnEditJob = view.findViewById(R.id.btn_edit_job);
-        likeButton = view.findViewById(R.id.btn_like);
+        //likeButton = view.findViewById(R.id.btn_like);
 
         this.loadJob();
-
-        this.loadLike();
-
-        this.configurationEditButton();
-
-        this.configurationLikeButton();
 
         btnEditJob.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,6 +153,80 @@ public class JobFragment extends Fragment implements ServiceCallback<APIResponse
         tv_description.setText(job.getDescription());
         tv_category.setText(job.getCategory());
         tv_user.setText(job.getUser());
+        tvCreateJob.setText(job.getCreatedAt());
+        if(job.getIsActive()){
+            btn_deactivatejob.setText(R.string.deactivate);
+            btn_deactivatejob.setBackground(ContextCompat.getDrawable(context, R.drawable.btn_custom_min));
+            btn_deactivatejob.setTextColor(getResources().getColor(R.color.White));
+            btn_deactivatejob.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+
+                    builder.setTitle(R.string.deactivatejob);
+                    builder.setMessage(R.string.message_of_deactivation_job);
+                    builder.setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Job job_to_save = new Job();
+                            job_to_save.setCategory(job.getCategoryId());
+                            job_to_save.setDescription(job.getDescription());
+                            job_to_save.setTitle(job.getTitle());
+                            job_to_save.setUser(job.getUserId());
+                            job_to_save.setIs_active(false);
+                            saveJob(job.getId(), job_to_save);
+                        }
+                    });
+                    builder.setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+                        }
+                    });
+                    builder.show();
+                }
+            });
+        }
+        else{
+            btn_deactivatejob.setText(R.string.activate);
+            btn_deactivatejob.setBackground(ContextCompat.getDrawable(context, R.drawable.et_inv_custom));
+            btn_deactivatejob.setTextColor(getResources().getColor(R.color.bgBeakHub));
+            btn_deactivatejob.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Job job_to_save = new Job();
+                    job_to_save.setCategory(job.getCategoryId());
+                    job_to_save.setDescription(job.getDescription());
+                    job_to_save.setTitle(job.getTitle());
+                    job_to_save.setUser(job.getUserId());
+                    job_to_save.setIs_active(true);
+                    saveJob(job.getId(), job_to_save);
+                }
+            });
+        }
+
+        this.configurationEditButton();
+    }
+
+    private void saveJob(Long job_id, Job job){
+        this.disposableJob = JobStreams.streamEditJob(job_id, job)
+                .subscribeWith(new DisposableObserver<APIResponse>() {
+                    @Override
+                    public void onNext(APIResponse response) {
+                        if(response.getCODE() == 200)
+                            initJob(Deserializer.getJob(response.getDATA()));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     private void loadJob(){
@@ -192,17 +276,12 @@ public class JobFragment extends Fragment implements ServiceCallback<APIResponse
     }
 
     private  void configurationEditButton(){
-        btnEditJob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
-
-        if(is_author.intValue() == 1){
+        if(account_id == job.getUserId()){
             btnEditJob.setVisibility(View.VISIBLE);
+            btn_deactivatejob.setVisibility(View.VISIBLE);
         }else{
             btnEditJob.setVisibility(View.INVISIBLE);
+            btn_deactivatejob.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -249,5 +328,12 @@ public class JobFragment extends Fragment implements ServiceCallback<APIResponse
 
     private void disposeWhenDestroy(){
         if (this.disposableLike != null && !this.disposableLike.isDisposed()) this.disposableLike.dispose();
+        if (this.disposableJob != null && !this.disposableJob.isDisposed()) this.disposableJob.dispose();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.disposeWhenDestroy();
     }
 }

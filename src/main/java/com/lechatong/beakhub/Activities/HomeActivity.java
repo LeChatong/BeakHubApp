@@ -15,6 +15,9 @@ import android.os.Bundle;
 
 import com.bumptech.glide.RequestManager;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.badge.BadgeDrawable;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import android.util.Log;
@@ -33,6 +36,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.navigation.NavigationView.OnNavigationItemSelectedListener;
 import com.google.gson.internal.LinkedTreeMap;
 import com.lechatong.beakhub.Fragments.HomeFragment;
+import com.lechatong.beakhub.Fragments.MyJobsFragment;
+import com.lechatong.beakhub.Fragments.NotificationFragment;
 import com.lechatong.beakhub.Models.BhAccount;
 import com.lechatong.beakhub.Models.BhUser;
 import com.lechatong.beakhub.R;
@@ -64,7 +69,7 @@ import io.reactivex.observers.DisposableObserver;
 public class HomeActivity extends AppCompatActivity
         implements OnNavigationItemSelectedListener, ServiceCallback<APIResponse> {
 
-    private Toolbar toolbar;
+    private MaterialToolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private BottomNavigationView bottomNavigationView;
@@ -72,13 +77,15 @@ public class HomeActivity extends AppCompatActivity
     private TextView tvEmail;
     private ImageView imgProfile;
 
-    private Fragment fragmentHome;
-
-    private Fragment fragmentSearch;
+    private Fragment fragmentHome, fragmentMyJob, fragmentSearch, fragmentNotification;
 
     private static final int FRAGMENT_HOME = 0;
 
-    private static final int FRAGMENT_SEARCH = 1;
+    private static final int FRAGMENT_MY_JOB = 1;
+
+    private static final int FRAGMENT_SEARCH = 2;
+
+    private static final int FRAGMENT_NOTIFICATION = 3;
 
     private Disposable disposable;
 
@@ -107,12 +114,17 @@ public class HomeActivity extends AppCompatActivity
                     Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_home);
                     showFragment(FRAGMENT_HOME);
                     return true;
+                case R.id.navigation_my_job:
+                    Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.title_my_job);
+                    showFragment(FRAGMENT_MY_JOB);
+                    return true;
                 case R.id.navigation_search:
                     Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.search);
                     showFragment(FRAGMENT_SEARCH);
                     return true;
                 case R.id.navigation_notification:
                     Objects.requireNonNull(getSupportActionBar()).setTitle(R.string.page_notifications);
+                    showFragment(FRAGMENT_NOTIFICATION);
                     return true;
             }
             return true;
@@ -152,6 +164,12 @@ public class HomeActivity extends AppCompatActivity
         this.showFirstFragment();
 
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        View v = bottomNavigationView.getChildAt(2);
+        BottomNavigationItemView itemView = (BottomNavigationItemView) v;
+
+        View badge = LayoutInflater.from(this)
+                .inflate(R.layout.custom_badge, itemView, true);
     }
 
     @Override
@@ -198,13 +216,21 @@ public class HomeActivity extends AppCompatActivity
             bundle.putLong("account_id", account_id);
             intent.putExtras(bundle);
             startActivity(intent);
-        } else if (id == R.id.nav_exit){
+        }
+        else if (id == R.id.nav_favorite){
+            intent = new Intent(this, FavoriteActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putLong("account_id", account_id);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
+        else if (id == R.id.nav_exit){
             new AlertDialog.Builder(context)
                     .setTitle(R.string.disconnection)
                     .setMessage(R.string.disconnection_message)
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            sharedPreferences.edit().clear().commit();
+                            sharedPreferences.edit().clear().apply();
                             intent = new Intent(HomeActivity.this, LoginActivity.class);
                             startActivity(intent);
                             finish();
@@ -222,7 +248,7 @@ public class HomeActivity extends AppCompatActivity
 
     @SuppressLint("ResourceAsColor")
     private void configureToolBar(){
-        this.toolbar = (Toolbar) findViewById(R.id.toolbarHome);
+        this.toolbar = (MaterialToolbar) findViewById(R.id.toolbarHome);
         this.toolbar.setTitleTextColor(R.color.White);
         setSupportActionBar(toolbar);
     }
@@ -360,12 +386,15 @@ public class HomeActivity extends AppCompatActivity
             case FRAGMENT_HOME :
                 this.showHomeFragment();
                 break;
+            case FRAGMENT_MY_JOB :
+                this.showMyJobFragment();
+                break;
             case FRAGMENT_SEARCH:
                 this.showSearchFragment();
                 break;
-            //case FRAGMENT_PARAMS:
-            //    this.showParamsFragment();
-            //    break;
+            case FRAGMENT_NOTIFICATION:
+                this.showNotificationFragment();
+                break;
             default:
                 break;
         }
@@ -374,21 +403,37 @@ public class HomeActivity extends AppCompatActivity
     private void showHomeFragment(){
         if (this.fragmentHome == null) this.fragmentHome = HomeFragment.newInstance();
 
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Acceuil");
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.title_home));
 
         this.startTransactionFragment(this.fragmentHome);
+    }
+
+    private void showMyJobFragment(){
+        if (this.fragmentMyJob == null) this.fragmentMyJob = MyJobsFragment.newInstance();
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.title_my_job));
+
+        this.startTransactionFragment(this.fragmentMyJob);
     }
 
     private void showSearchFragment(){
         if (this.fragmentSearch == null) this.fragmentSearch = SearchFragment.newInstance();
 
-        Objects.requireNonNull(getSupportActionBar()).setTitle("Recherche");
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.title_search));
 
         this.startTransactionFragment(this.fragmentSearch);
     }
 
+    private void showNotificationFragment(){
+        if (this.fragmentNotification == null) this.fragmentNotification = NotificationFragment.newInstance();
+
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.title_notifications));
+
+        this.startTransactionFragment(this.fragmentNotification);
+    }
+
     private void showFirstFragment(){
-        Fragment fragmentVisible =getSupportFragmentManager().findFragmentById(R.id.frame_main_layout);
+        Fragment fragmentVisible = getSupportFragmentManager().findFragmentById(R.id.frame_main_layout);
 
         if (fragmentVisible == null) {
             this.showHomeFragment();
@@ -396,7 +441,7 @@ public class HomeActivity extends AppCompatActivity
         }
     }
 
-    private void startTransactionFragment(Fragment fragment){
+    public void startTransactionFragment(Fragment fragment){
         if (!fragment.isVisible()){
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.frame_main_layout, fragment).commit();

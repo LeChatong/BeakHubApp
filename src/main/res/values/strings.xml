@@ -136,5 +136,30 @@
     <string name="show_address">Show Address</string>
     <string name="cancel">Cancel</string>
     <string name="menu">Menu</string>
+    <string name="notif_message_1">has like your job</string>
+    <string name="notif_message_2">has comment your job</string>
+    <string name="like">like</string>
+    <string name="see">See</string>
+    <string name="deactivateaccount">Desactivate My Account</string>
+    <string name="change_password">Change My Password</string>
+    <string name="register_at">Register At</string>
+    <string name="message_of_deactivation">Are you sure you want to deactivate your account? After this action you will no longer have access to the application</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="created_at">Added at</string>
+    <string name="deactivate">Deactivate</string>
+    <string name="activate">Activate</string>
+    <string name="deactivatejob">Deactivate this Job</string>
+    <string name="message_of_deactivation_job">Are you sure you want to deactivate your job ?</string>
+    <string name="job">Job</string>
+    <string name="address">Address</string>
+    <string name="no_job_for_user">You don\'t have a job</string>
+    <string name="title_my_job">My Job</string>
+    <string name="research">Research</string>
+    <string name="menu_favorite">Favorite</string>
+    <string name="change_pass">Change Password</string>
+    <string name="old_pass">Old Password</string>
+    <string name="new_pass">New Password</string>
+    <string name="my_favorite">My Favorite</string>
 
 </resources>

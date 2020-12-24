@@ -1,7 +1,8 @@
 package com.lechatong.beakhub.Tools.Streams;
 
-/*
+/**
  * Author : LeChatong
+ * Desc: This class provides a method who allow to have a user according to parameters
  */
 
 import com.lechatong.beakhub.Models.BhUser;

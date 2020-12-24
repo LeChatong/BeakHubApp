@@ -2,9 +2,10 @@ package com.lechatong.beakhub.Fragments;
 
 /**
  * Author: LeChatong
- * Desc: This Fragment list all activities on the user connected
+ * Desc: This fragment show All Job of the user connected
  */
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -18,14 +19,13 @@ import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
-import com.google.gson.internal.LinkedTreeMap;
+import com.lechatong.beakhub.Activities.AddJobActivity;
 import com.lechatong.beakhub.Activities.HomeActivity;
+import com.lechatong.beakhub.Activities.LoginActivity;
 import com.lechatong.beakhub.Activities.ProfileJobActivity;
 import com.lechatong.beakhub.Adapter.JobAdapter;
-import com.lechatong.beakhub.Activities.AddJobActivity;
-import com.lechatong.beakhub.Adapter.JobSearchAdapter;
-import com.lechatong.beakhub.Models.BhAccount;
 import com.lechatong.beakhub.Models.BhJob;
 import com.lechatong.beakhub.R;
 import com.lechatong.beakhub.Tools.APIResponse;
@@ -39,32 +39,36 @@ import java.util.List;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
-public class HomeFragment extends Fragment {
+public class MyJobsFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
     private List<BhJob> bhJobList;
 
-    private JobSearchAdapter jobAdapter;
+    private JobAdapter jobAdapter;
 
     private Disposable disposable;
 
-    //private com.google.android.material.floatingactionbutton.FloatingActionButton btnAddJob;
+    private ProgressDialog progressDialog;
+
+    private com.google.android.material.floatingactionbutton.FloatingActionButton btnAddJob;
 
     Intent intent;
 
     Context context;
 
+    private TextView tvHomeJob;
+
     private Long account_id;
 
-    public HomeFragment(){};
+    public MyJobsFragment() {
+    }
 
-    public static HomeFragment newInstance() {
-        return new HomeFragment();
+    public static MyJobsFragment newInstance() {
+        return new MyJobsFragment();
     }
 
     @Override
@@ -80,9 +84,11 @@ public class HomeFragment extends Fragment {
         assert activity != null;
         account_id = activity.getAccount_id();
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_my_jobs, container, false);
 
-        recyclerView = view.findViewById(R.id.recycler_view);
+        tvHomeJob = view.findViewById(R.id.tvHomeJob);
+
+        recyclerView = view.findViewById(R.id.recycler_view_my_job);
 
         recyclerView.setOnDragListener(new View.OnDragListener() {
             @Override
@@ -96,9 +102,9 @@ public class HomeFragment extends Fragment {
 
         this.loadRecyclerView();
 
-        //btnAddJob = (com.google.android.material.floatingactionbutton.FloatingActionButton)view.findViewById(R.id.btn_add_job);
+        btnAddJob = (com.google.android.material.floatingactionbutton.FloatingActionButton)view.findViewById(R.id.btn_add_job);
 
-        /*btnAddJob.setOnClickListener(new View.OnClickListener() {
+        btnAddJob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent = new Intent(getActivity(), AddJobActivity.class);
@@ -107,13 +113,12 @@ public class HomeFragment extends Fragment {
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
-        });*/
+        });
 
         this.configureOnClickRecyclerView();
 
         return view;
     }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -122,12 +127,16 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadRecyclerView(){
-        this.disposable = JobStreams.streamJobsMostSollicited()
+        progressDialog = ProgressDialog.show(context,
+                null, getString(R.string.please_wait), true);
+        progressDialog.setCancelable(true);
+        this.disposable = JobStreams.streamJobByUserId(account_id)
                 .subscribeWith(new DisposableObserver<APIResponse>(){
 
                     @Override
                     public void onNext(APIResponse bhJobs) {
                         updateListJob(bhJobs);
+                        progressDialog.cancel();
                     }
 
                     @Override
@@ -145,7 +154,7 @@ public class HomeFragment extends Fragment {
     private void configureRecyclerView(){
         this.bhJobList = new ArrayList<>();
 
-        this.jobAdapter = new JobSearchAdapter(this.bhJobList);
+        this.jobAdapter = new JobAdapter(this.bhJobList);
 
         this.recyclerView.setAdapter(jobAdapter);
 
@@ -155,11 +164,16 @@ public class HomeFragment extends Fragment {
     private void updateListJob(APIResponse value){
         List<BhJob> bhJobs = new ArrayList<BhJob>();
         ArrayList<BhJob> bhJobArrayList = (ArrayList<BhJob>) value.getDATA();
-        for(Object treeMap : bhJobArrayList){
-            bhJobs.add(Deserializer.getJob(treeMap));
+        if(!bhJobArrayList.isEmpty()){
+            tvHomeJob.setVisibility(View.INVISIBLE);
+            for(Object treeMap : bhJobArrayList){
+                bhJobs.add(Deserializer.getJob(treeMap));
+            }
+            bhJobList.addAll(bhJobs);
+            jobAdapter.notifyDataSetChanged();
+        }else{
+            tvHomeJob.setVisibility(View.VISIBLE);
         }
-        bhJobList.addAll(bhJobs);
-        jobAdapter.notifyDataSetChanged();
     }
 
     private void disposeWhenDestroy(){
@@ -167,7 +181,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void configureOnClickRecyclerView(){
-        ItemClickSupport.addTo(recyclerView, R.layout.card_job_search)
+        ItemClickSupport.addTo(recyclerView, R.layout.card_job)
                 .setOnItemClickListener(new ItemClickSupport.OnItemClickListener() {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
@@ -181,6 +195,5 @@ public class HomeFragment extends Fragment {
                     }
                 });
     }
+
 }
-
-

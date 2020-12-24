@@ -21,9 +21,9 @@ public class TabsProJobAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new AddressFragment();
-            case 1:
                 return new JobFragment();
+            case 1:
+                return new AddressFragment();
             case 2:
                 return new CommentFragment();
             default:

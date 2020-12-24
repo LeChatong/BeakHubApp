@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/tools"
+    android:layout_marginTop="0dp"
+    android:layout_marginStart="0dp"
+    android:layout_marginEnd="0dp"
+    android:layout_marginBottom="1dp"
+    android:foreground="?selectableItemBackground"
+    app:ignore="NamespaceTypo">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+        app:ignore="UselessParent">
+
+            <com.mikhaellopez.circularimageview.CircularImageView
+                android:id="@+id/ivDetailPP"
+                android:contentDescription="@string/nav_header_desc"
+                android:layout_height="70dp"
+                android:layout_width="70dp"
+                android:src="@mipmap/ic_launcher_round" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tvDetailNotif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_v3"
+                    android:text="@string/copyright"
+                    android:paddingStart="@dimen/text_size_v6"
+                    android:paddingEnd="@dimen/text_size_v6"
+                    android:paddingTop="@dimen/text_size_v6"/>
+                <TextView
+                    android:id="@+id/tvDetailComment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_v2"
+                    android:text="@string/copyright"
+                    android:textColor="@color/bhBlack"
+                    android:paddingStart="@dimen/text_size_v6"
+                    android:paddingEnd="@dimen/text_size_v6"
+                    android:paddingTop="@dimen/text_size_v6"/>
+                <TextView
+                    android:id="@+id/tvDetailDuring"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/text_size_v6"
+                    android:paddingEnd="@dimen/text_size_v6"
+                    android:paddingTop="@dimen/text_size_v6"
+                    android:textSize="@dimen/text_size"
+                    android:textColor="@color/bgBeakHub"
+                    android:text="@string/copyright"/>
+
+                <include layout="@layout/item_divider" />
+
+                <TextView
+                    android:id="@+id/tvDetailTitleJob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/text_size_v6"
+                    android:paddingEnd="@dimen/text_size_v6"
+                    android:paddingTop="@dimen/text_size_v6"
+                    android:textSize="@dimen/text_size_v3"
+                    android:textColor="@color/bgBeakHub"
+                    android:text="@string/copyright"/>
+
+                <TextView
+                    android:id="@+id/tvDetailCategory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/text_size_v6"
+                    android:paddingEnd="@dimen/text_size_v6"
+                    android:paddingTop="@dimen/text_size_v6"
+                    android:textSize="@dimen/text_size"
+                    android:textColor="@color/bhDarkGrey"
+                    android:text="@string/copyright"/>
+
+                <include layout="@layout/item_divider" />
+
+                <TextView
+                    android:id="@+id/tvDetailDescJob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/text_size_v2"
+                    android:text="@string/copyright"
+                    android:textColor="@color/bhBlack"
+                    android:paddingStart="@dimen/text_size_v6"
+                    android:paddingEnd="@dimen/text_size_v6"
+                    android:paddingTop="@dimen/text_size_v6"
+                    android:paddingBottom="@dimen/text_size_v6"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:orientation="horizontal">
+                    <!--<ImageView
+                        android:id="@+id/img_like"
+                        android:layout_height="20dp"
+                        android:layout_width="20dp"
+                        android:layout_marginTop="1dp"
+                        android:src="@drawable/ic_star_border_bh_24dp"/>-->
+                    <TextView
+                        android:id="@+id/tv_detail_nb_like"
+                        android:layout_width="60dp"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="1dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:textColor="@color/bgBeakHub"
+                        android:text="@string/example_likes"/>
+                    <!--<ImageView
+                        android:id="@+id/img_comment"
+                        android:layout_height="20dp"
+                        android:layout_width="20dp"
+                        android:layout_marginTop="1dp"
+                        android:src="@drawable/ic_textsms_bh_24dp"/>-->
+                    <TextView
+                        android:id="@+id/tv_detail_nb_comment"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="1dp"
+                        android:layout_marginTop="1dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:textColor="@color/bgBeakHub"
+                        android:text="@string/example_opinion"/>
+                </LinearLayout>
+
+                <!--<Button
+                    android:id="@+id/btnDetailsSee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/see"
+                    android:textColor="@color/bgBeakHub"
+                    android:background="@drawable/et_inv_custom"/>-->
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+</FrameLayout>

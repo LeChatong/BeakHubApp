@@ -12,12 +12,21 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.tabs.TabLayout;
 import com.lechatong.beakhub.Adapter.TabsProJobAdapter;
+import com.lechatong.beakhub.Entities.UserLikeJob;
 import com.lechatong.beakhub.Fragments.CommentFragment;
+import com.lechatong.beakhub.Models.BhUserLikeJob;
 import com.lechatong.beakhub.R;
+import com.lechatong.beakhub.Tools.APIResponse;
+import com.lechatong.beakhub.Tools.Deserializer;
+import com.lechatong.beakhub.Tools.Streams.LikeStreams;
+import com.lechatong.beakhub.WebService.BeakHubService;
+import com.like.LikeButton;
+import com.like.OnLikeListener;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -26,6 +35,9 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 
 import java.util.Objects;
+
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
 
 public class ProfileJobActivity extends AppCompatActivity {
 
@@ -51,11 +63,17 @@ public class ProfileJobActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
+    private LikeButton likeButton;
+
+    private Disposable disposableLike;
+
+    private BhUserLikeJob like;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_job);
-        Toolbar toolbar = findViewById(R.id.toolbar_pro_job);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar_pro_job);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
@@ -78,9 +96,11 @@ public class ProfileJobActivity extends AppCompatActivity {
 
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_pro_job);
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.my_address));
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.my_job));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.job));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.address));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.comments));
+
+        likeButton = findViewById(R.id.btn_like);
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
@@ -107,6 +127,10 @@ public class ProfileJobActivity extends AppCompatActivity {
             }
         });
 
+        this.loadLike();
+
+        this.configurationLikeButton();
+
     }
 
     public Long getIs_author(){ return is_author; }
@@ -119,5 +143,134 @@ public class ProfileJobActivity extends AppCompatActivity {
         return job_id;
     }
 
+    private void getLike(BhUserLikeJob bhUserLikeJob){
+        like = bhUserLikeJob;
+        if(like != null){
+            if(like.getIsLike()){
+                likeButton.setLiked(true);
+            }else{
+                likeButton.setLiked(false);
+            }
+        }else {
+            likeButton.setLiked(false);
+        }
+    }
+
+    private void loadLike(){
+        this.disposableLike = LikeStreams.streamOneLike(job_id, account_id)
+                .subscribeWith(new DisposableObserver<APIResponse>(){
+
+                    @Override
+                    public void onNext(APIResponse response) {
+                        if(response.getCODE() == 200){
+                            getLike(Deserializer.getUserLikeJob(response.getDATA()));
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void configurationLikeButton(){
+
+        likeButton.setOnLikeListener(new OnLikeListener() {
+            @Override
+            public void liked(LikeButton likeButton) {
+                if(like != null){
+                    UserLikeJob userLikeJob = new UserLikeJob(
+                            like.getId(),
+                            like.getJobId(),
+                            like.getUserId(),
+                            true
+                    );
+
+                    updateLike(like.getId(), userLikeJob);
+                    likeButton.setLiked(true);
+                }else{
+                    UserLikeJob userLikeJob = new UserLikeJob(
+                            null,
+                            job_id,
+                            account_id,
+                            true
+                    );
+                    newLike(userLikeJob);
+                    likeButton.setLiked(true);
+                }
+            }
+
+            @Override
+            public void unLiked(LikeButton likeButton) {
+                UserLikeJob userLikeJob = new UserLikeJob(
+                        like.getId(),
+                        like.getJobId(),
+                        like.getUserId(),
+                        false
+                );
+                updateLike(like.getId(), userLikeJob);
+                likeButton.setLiked(false);
+            }
+        });
+    }
+
+    private void updateLike(Long id_like, UserLikeJob userLikeJob) {
+        this.disposableLike = LikeStreams.streamEditLike(id_like, userLikeJob)
+                .subscribeWith(new DisposableObserver<APIResponse>() {
+                    @Override
+                    public void onNext(APIResponse response) {
+                        if(response.getCODE() == 200)
+                            getLike(Deserializer.getUserLikeJob(response.getDATA()));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void newLike(UserLikeJob userLikeJob) {
+        this.disposableLike = LikeStreams.streamNewLike(userLikeJob)
+                .subscribeWith(new DisposableObserver<APIResponse>() {
+                    @Override
+                    public void onNext(APIResponse response) {
+                        if(response.getCODE() == 200)
+                            getLike(Deserializer.getUserLikeJob(response.getDATA()));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void disposeWhenDestroy(){
+        if (this.disposableLike != null && !this.disposableLike.isDisposed()) this.disposableLike.dispose();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        this.disposeWhenDestroy();
+    }
 
 }

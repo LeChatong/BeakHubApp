@@ -5,6 +5,7 @@ package com.lechatong.beakhub.Tools.Streams;
  * Desc: This class provides a method who allow to have a jobs according to parameters
  */
 
+import com.lechatong.beakhub.Entities.Job;
 import com.lechatong.beakhub.Models.BhJob;
 import com.lechatong.beakhub.Tools.APIResponse;
 import com.lechatong.beakhub.WebService.IBeakHubService;
@@ -18,6 +19,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 public class JobStreams {
+
     /**
      * Get the Job by a User
      * @param idUser
@@ -27,6 +29,19 @@ public class JobStreams {
         IBeakHubService iBeakHubService = IBeakHubService.retrofit.create(IBeakHubService.class);
 
         return iBeakHubService.getJobByIdUser(idUser).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(20, TimeUnit.SECONDS);
+    }
+
+    /**
+     * Desc: Get Job by Category
+     * @param idCategory
+     * @return
+     */
+    public static Observable<APIResponse> streamJobByCategoryId(Long idCategory){
+        IBeakHubService iBeakHubService = IBeakHubService.retrofit.create(IBeakHubService.class);
+
+        return iBeakHubService.getJobByIdCategory(idCategory).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .timeout(20, TimeUnit.SECONDS);
     }
@@ -57,4 +72,27 @@ public class JobStreams {
                 .timeout(20, TimeUnit.SECONDS);
     }
 
+    public static Observable<APIResponse> streamEditJob(Long job_id, Job job){
+        IBeakHubService iBeakHubService = IBeakHubService.retrofit.create(IBeakHubService.class);
+
+        return iBeakHubService.editJob(job_id, job).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(20, TimeUnit.SECONDS);
+    }
+
+    public static Observable<APIResponse> streamJobsMostSollicited(){
+        IBeakHubService iBeakHubService = IBeakHubService.retrofit.create(IBeakHubService.class);
+
+        return iBeakHubService.getJobsMostSollicited().subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(20, TimeUnit.SECONDS);
+    }
+
+    public static Observable<APIResponse> streamJobsFavByUser(Long user_id){
+        IBeakHubService iBeakHubService = IBeakHubService.retrofit.create(IBeakHubService.class);
+
+        return iBeakHubService.getJobsFavByUser(user_id).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .timeout(20, TimeUnit.SECONDS);
+    }
 }

@@ -30,9 +30,11 @@ import com.lechatong.beakhub.Tools.APIResponse;
 import com.lechatong.beakhub.Tools.Deserializer;
 import com.lechatong.beakhub.Tools.ItemClickSupport;
 import com.lechatong.beakhub.Tools.Streams.AddressStreams;
+import com.lechatong.beakhub.Tools.Streams.JobStreams;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
@@ -43,11 +45,15 @@ public class AddressFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
+    private FloatingActionButton btn_add_address;
+
     private List<BhAddress> addressList;
 
     private AddressAdapter addressAdapter;
 
     private Disposable disposable;
+
+    private Disposable disposableJob;
 
     Intent intent;
 
@@ -55,11 +61,15 @@ public class AddressFragment extends Fragment {
 
     private Long job_id;
 
-    private Long is_author;
+    private BhJob job;
+
+    private Long is_author, account_id;
 
     private static final String ID_JOB = "JOB_ID";
 
     private static final String IS_AUTHOR = "IS_AUTHOR";
+
+    private static final String ID_ACCOUNT = "ID_ACCOUNT";
 
     private static final String PREFS = "PREFS";
 
@@ -84,13 +94,14 @@ public class AddressFragment extends Fragment {
         assert activity != null;
         job_id = activity.getSharedPreferences(PREFS, MODE_PRIVATE).getLong(ID_JOB,0);
         is_author = activity.getSharedPreferences(PREFS, MODE_PRIVATE).getLong(IS_AUTHOR,0);
+        account_id = activity.getSharedPreferences(PREFS, MODE_PRIVATE).getLong(ID_ACCOUNT, 0);
 
         View view = inflater.inflate(R.layout.fragment_address, container, false);
 
         recyclerView = view.findViewById(R.id.recycler_view_address);
 
-        FloatingActionButton fab = view.findViewById(R.id.btn_add_address);
-        fab.setOnClickListener(new View.OnClickListener() {
+        btn_add_address = view.findViewById(R.id.btn_add_address);
+        btn_add_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent = new Intent(context, AddAddressActivity.class);
@@ -101,17 +112,13 @@ public class AddressFragment extends Fragment {
             }
         });
 
-        if(is_author.intValue() == 1){
-            fab.setVisibility(View.VISIBLE);
-        }else{
-            fab.setVisibility(View.INVISIBLE);
-        }
-
         this.loadRecyclerView();
 
         this.configureRecyclerView();
 
         this.configureOnClickRecyclerView();
+
+        this.loadJob();
 
         return view;
     }
@@ -165,6 +172,7 @@ public class AddressFragment extends Fragment {
 
     private void disposeWhenDestroy(){
         if (this.disposable != null && !this.disposable.isDisposed()) this.disposable.dispose();
+        if (this.disposableJob != null && !this.disposableJob.isDisposed()) this.disposableJob.dispose();
     }
 
     private void configureOnClickRecyclerView(){
@@ -203,5 +211,36 @@ public class AddressFragment extends Fragment {
                         return false;
                     }
                 });
+    }
+
+    private void loadJob(){
+        this.disposableJob = JobStreams.streamOneJob(job_id)
+                .subscribeWith(new DisposableObserver<APIResponse>(){
+
+                    @Override
+                    public void onNext(APIResponse response) {
+                        if(response.getCODE() == 200)
+                            initJob(Deserializer.getJob(response.getDATA()));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void initJob(BhJob bhJob){
+        job = bhJob;
+        if(Objects.equals(job.getUserId(), account_id)){
+            btn_add_address.setVisibility(View.VISIBLE);
+        }else{
+            btn_add_address.setVisibility(View.INVISIBLE);
+        }
     }
 }

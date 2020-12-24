@@ -8,6 +8,7 @@
     <dimen name="nav_header_height">300dp</dimen>
     <dimen name="title">30sp</dimen>
 
+    <dimen name="text_size_v6">8sp</dimen>
 
     <dimen name="text_size">12sp</dimen>
     <dimen name="text_size_v1">14sp</dimen>

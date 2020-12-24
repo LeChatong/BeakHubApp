@@ -2,6 +2,7 @@ package com.lechatong.beakhub.Models;
 
 /**
  * Author: LeChatong
+ * Desc: This class will help to get the notifications
  */
 
 import com.google.gson.annotations.Expose;
@@ -33,6 +34,18 @@ public class BhEvent {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+    @SerializedName("job_title")
+    @Expose
+    private String job_title;
+    @SerializedName("name_sender")
+    @Expose
+    private String name_sender;
+    @SerializedName("url_picture_sender")
+    @Expose
+    private String url_picture_sender;
+    @SerializedName("how_hours")
+    @Expose
+    private Long how_hours;
 
     public Long getId() {
         return id;
@@ -98,4 +111,35 @@ public class BhEvent {
         this.updatedAt = updatedAt;
     }
 
+    public String getJob_title() {
+        return job_title;
+    }
+
+    public void setJob_title(String job_title) {
+        this.job_title = job_title;
+    }
+
+    public String getName_sender() {
+        return name_sender;
+    }
+
+    public void setName_sender(String name_sender) {
+        this.name_sender = name_sender;
+    }
+
+    public String getUrl_picture_sender() {
+        return url_picture_sender;
+    }
+
+    public void setUrl_picture_sender(String url_picture_sender) {
+        this.url_picture_sender = url_picture_sender;
+    }
+
+    public Long getHow_hours() {
+        return how_hours;
+    }
+
+    public void setHow_hours(Long how_hours) {
+        this.how_hours = how_hours;
+    }
 }

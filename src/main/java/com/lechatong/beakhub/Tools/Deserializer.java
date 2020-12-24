@@ -159,6 +159,10 @@ public class Deserializer {
         bhEvent.setIsView(Boolean.parseBoolean(t.get("is_view").toString()));
         bhEvent.setCreatedAt(t.get("created_at").toString());
         bhEvent.setUpdatedAt(t.get("updated_at").toString());
+        bhEvent.setJob_title(t.get("job_title").toString());
+        bhEvent.setName_sender(t.get("name_sender").toString());
+        bhEvent.setUrl_picture_sender(t.get("url_picture_sender").toString());
+        bhEvent.setHow_hours(Double.valueOf (t.get("how_hours").toString()).longValue());
 
         return  bhEvent;
     }

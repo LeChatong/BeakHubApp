@@ -1,31 +1,17 @@
-package com.lechatong.beakhub.Fragments;
+package com.lechatong.beakhub.Activities;
 
-/**
- * Author: LeChatong
- * Desc: This Fragment list all activities on the user connected
- */
-
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.DragEvent;
-import android.view.LayoutInflater;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 
-import com.google.gson.internal.LinkedTreeMap;
-import com.lechatong.beakhub.Activities.HomeActivity;
-import com.lechatong.beakhub.Activities.ProfileJobActivity;
-import com.lechatong.beakhub.Adapter.JobAdapter;
-import com.lechatong.beakhub.Activities.AddJobActivity;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.lechatong.beakhub.Adapter.JobSearchAdapter;
-import com.lechatong.beakhub.Models.BhAccount;
 import com.lechatong.beakhub.Models.BhJob;
 import com.lechatong.beakhub.R;
 import com.lechatong.beakhub.Tools.APIResponse;
@@ -35,15 +21,12 @@ import com.lechatong.beakhub.Tools.Streams.JobStreams;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import io.reactivex.disposables.Disposable;
 import io.reactivex.observers.DisposableObserver;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
-public class HomeFragment extends Fragment {
+public class FavoriteActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
@@ -53,18 +36,42 @@ public class HomeFragment extends Fragment {
 
     private Disposable disposable;
 
-    //private com.google.android.material.floatingactionbutton.FloatingActionButton btnAddJob;
+    private MaterialToolbar toolbar;
 
     Intent intent;
 
     Context context;
 
+    private static final String ID_ACCOUNT = "ID_ACCOUNT";
+
+    private static final String PREFS = "PREFS";
+
+    SharedPreferences sharedPreferences;
+
     private Long account_id;
 
-    public HomeFragment(){};
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_favorite);
 
-    public static HomeFragment newInstance() {
-        return new HomeFragment();
+        context = this;
+
+        sharedPreferences = getBaseContext().getSharedPreferences(PREFS, MODE_PRIVATE);
+
+        account_id = sharedPreferences.getLong(ID_ACCOUNT, 0);
+
+        toolbar = findViewById(R.id.toolbar_fav);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
+        recyclerView = findViewById(R.id.recycler_view_fav);
+
+        this.configureRecyclerView();
+
+        this.loadRecyclerView();
+
+        this.configureOnClickRecyclerView();
     }
 
     @Override
@@ -73,56 +80,8 @@ public class HomeFragment extends Fragment {
         this.disposeWhenDestroy();
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        HomeActivity activity = (HomeActivity) getActivity();
-        assert activity != null;
-        account_id = activity.getAccount_id();
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-
-        recyclerView = view.findViewById(R.id.recycler_view);
-
-        recyclerView.setOnDragListener(new View.OnDragListener() {
-            @Override
-            public boolean onDrag(View view, DragEvent dragEvent) {
-                loadRecyclerView();
-                return false;
-            }
-        });
-
-        this.configureRecyclerView();
-
-        this.loadRecyclerView();
-
-        //btnAddJob = (com.google.android.material.floatingactionbutton.FloatingActionButton)view.findViewById(R.id.btn_add_job);
-
-        /*btnAddJob.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intent = new Intent(getActivity(), AddJobActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putLong("account_id", account_id);
-                intent.putExtras(bundle);
-                startActivity(intent);
-            }
-        });*/
-
-        this.configureOnClickRecyclerView();
-
-        return view;
-    }
-
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        context = getActivity();
-    }
-
     private void loadRecyclerView(){
-        this.disposable = JobStreams.streamJobsMostSollicited()
+        this.disposable = JobStreams.streamJobsFavByUser(account_id)
                 .subscribeWith(new DisposableObserver<APIResponse>(){
 
                     @Override
@@ -149,7 +108,7 @@ public class HomeFragment extends Fragment {
 
         this.recyclerView.setAdapter(jobAdapter);
 
-        this.recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     private void updateListJob(APIResponse value){
@@ -172,7 +131,7 @@ public class HomeFragment extends Fragment {
                     @Override
                     public void onItemClicked(RecyclerView recyclerView, int position, View v) {
                         BhJob bhJob = jobAdapter.getBhJob(position);
-                        intent = new Intent(getActivity(), ProfileJobActivity.class);
+                        intent = new Intent(context, ProfileJobActivity.class);
                         Bundle bundle = new Bundle();
                         bundle.putLong("job_id", bhJob.getId());
                         bundle.putLong("is_author", 1);
@@ -182,5 +141,3 @@ public class HomeFragment extends Fragment {
                 });
     }
 }
-
-

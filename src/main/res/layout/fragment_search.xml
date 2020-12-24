@@ -22,20 +22,31 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         android:orientation="vertical">
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="0dp"
-            android:padding="5dp"
-            android:queryHint="Search Here"
-            android:iconifiedByDefault="false"
-            android:background="@drawable/et_inv_custom"
-            android:textColorHint="@color/bgBeakHub"
-            android:textSize="15sp" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="290dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="@dimen/text_size_v2"
+                android:layout_marginEnd="@dimen/text_size"
+                android:layout_marginTop="0dp"
+                android:queryHint="Search Here"
+                android:iconifiedByDefault="true"
+                android:background="@drawable/et_inv_custom"
+                android:textColorHint="@color/bgBeakHub"
+                android:textSize="15sp" />
+            <ImageView
+                android:id="@+id/ivFilter"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:clickable="true"
+                android:src="@drawable/ic_filter_list_bh_24dp"
+                android:focusable="true" />
+        </LinearLayout>
+
         <include layout="@layout/item_divider" />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

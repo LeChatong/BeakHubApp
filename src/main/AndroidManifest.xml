@@ -20,10 +20,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.AccountActivity"
+        <activity
+            android:name=".Activities.ChangePasswordActivity"
+            android:label="@string/change_password"
+            android:parentActivityName=".Activities.AccountActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".Activities.FavoriteActivity"
+            android:label="@string/menu_favorite"
+            android:parentActivityName=".Activities.HomeActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".Activities.AccountActivity"
             android:label="@string/my_account"
             android:parentActivityName=".Activities.ProfileUserActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Activities.AddAddressActivity"
             android:label="@string/add_address"
@@ -32,13 +43,11 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.lechatong.beakhub.Activities.ProfileJobActivity" />
-        </activity>
-        <!-- Home Activity -->
+        </activity> <!-- Home Activity -->
         <activity
             android:name=".Activities.HomeActivity"
             android:label="@string/title_activity_home"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <!-- Login Activity -->
+            android:theme="@style/AppTheme.NoActionBar" /> <!-- Login Activity -->
         <activity
             android:name=".Activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" /> <!-- About Activity -->
