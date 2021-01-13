@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.lechatong.beakhub.Entities.User;
@@ -126,10 +127,8 @@ public class RegisterUserActivity extends AppCompatActivity implements ServiceCa
         }else if(value.getCODE() == 201){
             progressDialog.cancel();
             BhUser user = Deserializer.getUser(value.getDATA());
-            intent = new Intent(context, HomeActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putLong("account_id", user.getId());
-            intent.putExtras(bundle);
+            intent = new Intent(context, LoginActivity.class);
+            Toast.makeText(this, getString(R.string.log_in), Toast.LENGTH_LONG).show();
             progressDialog.cancel();
             startActivity(intent);
             finish();

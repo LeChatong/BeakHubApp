@@ -6,7 +6,7 @@
     <string name="search_blank_fragment">Search blank fragment</string>
     <string name="profile_blank_fragment">Profile blank fragment</string>
     <string name="swipe_left_for_register">Register</string>
-    <string name="forgot_password">Forgot</string>
+    <string name="forgot_password">Forgot your password ?</string>
     <string name="login">Login</string>
     <string name="sign_in">Sign In</string>
     <string name="password">Password</string>
@@ -161,5 +161,13 @@
     <string name="old_pass">Old Password</string>
     <string name="new_pass">New Password</string>
     <string name="my_favorite">My Favorite</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="register_account">Register your account</string>
+    <string name="log_in">Log in</string>
+    <string name="ongoing_process">Ongoing process</string>
+    <string name="success">Success</string>
+    <string name="ok">Ok</string>
+    <string name="password_not_conform">Password incorrectly confirmed</string>
+    <string name="confirm_password">Confirm Password</string>
 
 </resources>

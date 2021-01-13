@@ -130,7 +130,7 @@ public class AddJobActivity extends AppCompatActivity implements ServiceCallback
             loadJob();
             toolbar.setTitle(R.string.edit_job);
         }else{
-
+            toolbar.setTitle(R.string.add_job);
         }
 
         this.loadCategory();

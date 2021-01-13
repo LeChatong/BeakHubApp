@@ -5,6 +5,7 @@ package com.lechatong.beakhub.WebService;
  * Desc: this interface help to Call request from API
  */
 
+import com.lechatong.beakhub.Entities.Account;
 import com.lechatong.beakhub.Entities.Address;
 import com.lechatong.beakhub.Entities.Comment;
 import com.lechatong.beakhub.Entities.Job;
@@ -56,6 +57,15 @@ public interface IBeakHubService {
 
     @GET("accounts/{id}")
     Observable<APIResponse> getAccount(@Path("id") Long id);
+
+    @GET("accounts/init")
+    Observable<APIResponse> initMyPassword(@Query("mail") String email);
+
+    @GET("accounts/{id}/{password}")
+    Observable<APIResponse> getAccountByIdAndPassword(@Path("id") Long id, @Path("password") String password);
+
+    @PUT("accounts/password/change/{id}")
+    Observable<APIResponse> accountChangePassword(@Path("id") Long id, @Body Account account);
 
     @POST("users")
     Call<APIResponse> createUser(@Body User bhUser);

@@ -20,10 +20,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
-import com.google.gson.Gson;
-import com.google.gson.internal.LinkedTreeMap;
-import com.google.gson.reflect.TypeToken;
-import com.lechatong.beakhub.ForgotPasswordActivity;
 import com.lechatong.beakhub.Models.BhAccount;
 import com.lechatong.beakhub.Models.BhUser;
 import com.lechatong.beakhub.R;
@@ -32,12 +28,6 @@ import com.lechatong.beakhub.Tools.Deserializer;
 import com.lechatong.beakhub.Tools.ServiceCallback;
 import com.lechatong.beakhub.Tools.Tools;
 import com.lechatong.beakhub.WebService.BeakHubService;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 
 import static com.google.android.material.snackbar.BaseTransientBottomBar.LENGTH_INDEFINITE;
 
@@ -70,7 +60,7 @@ public class LoginActivity extends AppCompatActivity implements ServiceCallback<
         sharedPreferences = getBaseContext().getSharedPreferences(PREFS, MODE_PRIVATE);
 
         final Button btn_login = (Button) findViewById(R.id.btn_login);
-        final TextView txtRegister = (TextView) findViewById(R.id.tv_register);
+        final Button btn_sign_up = (Button) findViewById(R.id.btn_sign_up);
         final TextView txtForgot = (TextView) findViewById(R.id.tv_forgot);
 
         etUsername = (EditText) findViewById(R.id.et_username);
@@ -84,7 +74,7 @@ public class LoginActivity extends AppCompatActivity implements ServiceCallback<
             }
         });
 
-        txtRegister.setOnClickListener(new View.OnClickListener() {
+        btn_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 intent = new Intent(context, RegisterAccountActivity.class);

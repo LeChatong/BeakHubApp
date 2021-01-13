@@ -270,6 +270,7 @@ public class ProfileJobActivity extends AppCompatActivity {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        sharedPreferences.edit().remove(ID_JOB).apply();
         this.disposeWhenDestroy();
     }
 

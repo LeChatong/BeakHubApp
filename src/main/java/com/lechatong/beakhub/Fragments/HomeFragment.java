@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.DragEvent;
 import android.view.LayoutInflater;
@@ -61,6 +62,8 @@ public class HomeFragment extends Fragment {
 
     private Long account_id;
 
+    private SwipeRefreshLayout refreshHome;
+
     public HomeFragment(){};
 
     public static HomeFragment newInstance() {
@@ -81,6 +84,8 @@ public class HomeFragment extends Fragment {
         account_id = activity.getAccount_id();
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        refreshHome = view.findViewById(R.id.refreshHome);
 
         recyclerView = view.findViewById(R.id.recycler_view);
 
@@ -110,6 +115,14 @@ public class HomeFragment extends Fragment {
         });*/
 
         this.configureOnClickRecyclerView();
+
+        refreshHome.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadRecyclerView();
+                refreshHome.setRefreshing(false);
+            }
+        });
 
         return view;
     }

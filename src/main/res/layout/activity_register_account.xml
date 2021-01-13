@@ -6,99 +6,107 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:id="@+id/register_layout"
-    android:background="@color/bgBeakHub"
+    android:background="@color/White"
     tools:context=".Activities.RegisterAccountActivity">
 
-    <TextView
-        android:id="@+id/tv_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/register"
-        android:textAlignment="center"
-        android:textSize="50sp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="5dp"
-        android:textColor="@color/White"
-        android:layout_marginTop="60dp"/>
-
-    <TextView
-        android:id="@+id/tv_subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tag"
-        android:textSize="17sp"
-        android:textColor="@color/White"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="50dp"
-        android:layout_below="@+id/tv_register"/>
-
-    <EditText
-        android:id="@+id/et_username_reg"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="@string/bhAccount"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
-        android:padding="15dp"
-        android:inputType="textPersonName"
-        android:background="@drawable/et_custom"
-        android:textColorHint="@color/White"
-        android:textColor="@color/White"
-        android:textSize="15sp"
-        android:layout_below="@+id/tv_subtitle"/>
+        android:layout_height="match_parent"
+        android:background="@drawable/beak_solo"
+        tools:ignore="UselessParent">
 
-    <EditText
-        android:id="@+id/et_password_reg"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="@string/password"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="30dp"
-        android:padding="15dp"
-        android:inputType="textPassword"
-        android:textColor="@color/White"
-        android:background="@drawable/et_custom"
-        android:textColorHint="@color/White"
-        android:textSize="15sp"
-        android:layout_below="@+id/et_username_reg"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_register"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sign_up"
+                android:textAlignment="center"
+                android:textSize="50sp"
+                android:layout_marginStart="25dp"
+                android:layout_marginBottom="5dp"
+                android:textColor="@color/bgBeakHub"
+                android:layout_marginTop="60dp"/>
 
-    <EditText
-        android:id="@+id/et_repassword_reg"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:hint="@string/re_type_password"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
-        android:padding="15dp"
-        android:inputType="textPassword"
-        android:background="@drawable/et_custom"
-        android:textColorHint="@color/White"
-        android:textColor="@color/White"
-        android:textSize="15sp"
-        android:layout_below="@+id/et_password_reg"/>
+            <TextView
+                android:id="@+id/tv_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/register_account"
+                android:textSize="17sp"
+                android:textColor="@color/bgBeakHub"
+                android:layout_marginStart="25dp"
+                android:layout_marginBottom="50dp"/>
 
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="30dp"
-        android:background="@drawable/btn_custom"
-        android:text="@string/register"
-        android:textColor="@android:color/white"
-        android:layout_below="@+id/et_repassword_reg"/>
+            <EditText
+                android:id="@+id/et_username_reg"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/bhAccount"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:padding="15dp"
+                android:inputType="textPersonName"
+                android:background="@drawable/et_inv_custom"
+                android:textColorHint="@color/bgBeakHub"
+                android:textColor="@color/bgBeakHub"
+                android:textSize="15sp"/>
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:src="@drawable/beak_solo"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"/>
+            <EditText
+                android:id="@+id/et_password_reg"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/password"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="30dp"
+                android:padding="15dp"
+                android:inputType="textPassword"
+                android:textColor="@color/bgBeakHub"
+                android:background="@drawable/et_inv_custom"
+                android:textColorHint="@color/bgBeakHub"
+                android:textSize="15sp"/>
 
+            <EditText
+                android:id="@+id/et_repassword_reg"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/re_type_password"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                android:padding="15dp"
+                android:inputType="textPassword"
+                android:background="@drawable/et_inv_custom"
+                android:textColorHint="@color/bgBeakHub"
+                android:textColor="@color/bgBeakHub"
+                android:textSize="15sp"
+                tools:ignore="Autofill" />
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/btn_custom_min"
+                android:text="@string/register"
+                android:textColor="@android:color/white"/>
+
+            <ImageView
+                android:layout_width="200dp"
+                android:layout_height="100dp"
+                android:src="@drawable/beak_solo"
+                android:layout_gravity="bottom|center"
+                tools:ignore="ContentDescription" />
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

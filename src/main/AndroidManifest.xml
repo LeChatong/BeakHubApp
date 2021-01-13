@@ -73,7 +73,8 @@
             android:parentActivityName=".Activities.HomeActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".ForgotPasswordActivity"
+            android:name=".Activities.ForgotPasswordActivity"
+            android:parentActivityName=".Activities.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" /> <!-- Register Account Activity -->
         <activity
             android:name=".Activities.RegisterAccountActivity"

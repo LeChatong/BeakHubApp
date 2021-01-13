@@ -183,7 +183,7 @@ public class AddressFragment extends Fragment {
                         /**/
                     }
                 })
-                .setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
+                /*.setOnItemLongClickListener(new ItemClickSupport.OnItemLongClickListener() {
                     @Override
                     public boolean onItemLongClicked(RecyclerView recyclerView, int position, View v) {
 
@@ -210,7 +210,7 @@ public class AddressFragment extends Fragment {
                                 .show();
                         return false;
                     }
-                });
+                })*/;
     }
 
     private void loadJob(){

@@ -95,8 +95,6 @@ public class HomeActivity extends AppCompatActivity
 
     private Context context;
 
-    private static final int REQUEST_CODE = 1;
-
     private static final String ID_ACCOUNT = "ID_ACCOUNT";
 
     private static final String USERNAME = "USERNAME";
